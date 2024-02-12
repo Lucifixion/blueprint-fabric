@@ -1,7 +1,7 @@
 package com.teamabnormals.blueprint.common.world.modification.structure;
 
 import com.mojang.serialization.Codec;
-import com.teamabnormals.blueprint.core.Blueprint;
+import com.teamabnormals.blueprint.core.BlueprintForge;
 import com.teamabnormals.blueprint.core.registry.BlueprintDataPackRegistries;
 import com.teamabnormals.blueprint.core.util.registry.BasicRegistry;
 import net.minecraft.core.Holder;
@@ -28,15 +28,15 @@ import java.util.*;
  * @see StructureRepaletterEntry
  * @see StructureRepaletter
  */
-@Mod.EventBusSubscriber(modid = Blueprint.MOD_ID)
+@Mod.EventBusSubscriber(modid = BlueprintForge.MOD_ID)
 public final class StructureRepalleterManager {
 	static final BasicRegistry<Codec<? extends StructureRepaletter>> REPALLETER_SERIALIZERS = new BasicRegistry<>();
 	private static final IdentityHashMap<ResourceKey<Structure>, StructureRepaletterEntry[]> ASSIGNED_REPALLETERS = new IdentityHashMap<>();
 	private static final ThreadLocal<ActiveData> ACTIVE_DATA = ThreadLocal.withInitial(ActiveData::new);
 
 	static {
-		registerSerializer(new ResourceLocation(Blueprint.MOD_ID, "simple"), SimpleStructureRepaletter.CODEC);
-		registerSerializer(new ResourceLocation(Blueprint.MOD_ID, "weighted"), WeightedStructureRepaletter.CODEC);
+		registerSerializer(new ResourceLocation(BlueprintForge.MOD_ID, "simple"), SimpleStructureRepaletter.CODEC);
+		registerSerializer(new ResourceLocation(BlueprintForge.MOD_ID, "weighted"), WeightedStructureRepaletter.CODEC);
 	}
 
 	@SubscribeEvent

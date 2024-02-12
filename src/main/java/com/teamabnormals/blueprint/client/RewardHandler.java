@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName;
 import com.mojang.authlib.minecraft.MinecraftProfileTexture;
 import com.teamabnormals.blueprint.client.renderer.SlabfishHatRenderLayer;
 import com.teamabnormals.blueprint.common.world.storage.tracking.IDataManager;
-import com.teamabnormals.blueprint.core.Blueprint;
+import com.teamabnormals.blueprint.core.BlueprintForge;
 import com.teamabnormals.blueprint.core.BlueprintConfig;
 import com.teamabnormals.blueprint.core.sonar.OnlineRequest;
 import com.teamabnormals.blueprint.core.util.NetworkUtil;
@@ -42,14 +42,14 @@ import java.util.function.Supplier;
  *
  * @author Jackson
  */
-@Mod.EventBusSubscriber(modid = Blueprint.MOD_ID, value = Dist.CLIENT)
+@Mod.EventBusSubscriber(modid = BlueprintForge.MOD_ID, value = Dist.CLIENT)
 public final class RewardHandler {
 	public static final Map<UUID, RewardData> REWARDS = new HashMap<>();
 
 	private static final Logger LOGGER = LogManager.getLogger();
 	private static final Gson GSON = new Gson();
 	private static final String REWARDS_URL = "https://api.minecraftabnormals.com/rewards.json";
-	private static final ResourceLocation CAPE_TEXTURE = new ResourceLocation(Blueprint.MOD_ID, "textures/abnormals_cape.png");
+	private static final ResourceLocation CAPE_TEXTURE = new ResourceLocation(BlueprintForge.MOD_ID, "textures/abnormals_cape.png");
 
 	private static RewardProperties rewardProperties;
 
@@ -129,7 +129,7 @@ public final class RewardHandler {
 		}
 
 		public static boolean getSetting(IDataManager data, SlabfishSetting flag) {
-			return ((data.getValue(Blueprint.SLABFISH_SETTINGS) >> flag.ordinal()) & 1) > 0;
+			return ((data.getValue(BlueprintForge.SLABFISH_SETTINGS) >> flag.ordinal()) & 1) > 0;
 		}
 	}
 

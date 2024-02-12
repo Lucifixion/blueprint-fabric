@@ -78,7 +78,7 @@ public interface AnimateTickEvents {
 	@FunctionalInterface
 	interface Fluid {
 		/**
-		 * Called when this listener is fired from {@link net.minecraft.world.level.material.Fluid#animateTick(BlockState, Level, BlockPos, RandomSource)}.
+		 * Called when this listener is fired from {@link net.minecraft.world.level.material.Fluid#animateTick(Level, BlockPos, FluidState, RandomSource)}.
 		 *
 		 * @param state        The {@link FluidState} instance at the position in the level.
 		 * @param level        The {@link Level} instance where the ticking is occurring.

@@ -4,6 +4,7 @@ import com.teamabnormals.blueprint.core.util.registry.EntitySubRegistryHelper;
 import common.entity.EndimatedWalkingEntity;
 import common.entity.TestEndimatedEntity;
 import core.BlueprintTest;
+import io.github.fabricators_of_create.porting_lib.util.RegistryObject;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.PathfinderMob;

@@ -2,7 +2,8 @@ package com.teamabnormals.blueprint.core.registry;
 
 import com.teamabnormals.blueprint.common.world.modification.ModdedBiomeSlice;
 import com.teamabnormals.blueprint.common.world.modification.structure.StructureRepaletterEntry;
-import com.teamabnormals.blueprint.core.Blueprint;
+import com.teamabnormals.blueprint.core.BlueprintForge;
+import net.fabricmc.fabric.api.event.registry.FabricRegistryBuilder;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -22,12 +23,14 @@ public final class BlueprintDataPackRegistries {
 	 *
 	 * @param event A {@link DataPackRegistryEvent.NewRegistry} event instance to register to.
 	 */
-	public static void registerRegistries(DataPackRegistryEvent.NewRegistry event) {
-		event.dataPackRegistry(STRUCTURE_REPALETTERS, StructureRepaletterEntry.CODEC);
-		event.dataPackRegistry(MODDED_BIOME_SLICES, ModdedBiomeSlice.CODEC);
+	public static void registerRegistries(/*DataPackRegistryEvent.NewRegistry event*/) {
+		FabricRegistryBuilder.createSimple(STRUCTURE_REPALETTERS);
+		FabricRegistryBuilder.createSimple(MODDED_BIOME_SLICES);
+//		event.dataPackRegistry(STRUCTURE_REPALETTERS, StructureRepaletterEntry.CODEC);
+//		event.dataPackRegistry(MODDED_BIOME_SLICES, ModdedBiomeSlice.CODEC);
 	}
 
 	private static <T> ResourceKey<Registry<T>> key(String name) {
-		return ResourceKey.createRegistryKey(new ResourceLocation(Blueprint.MOD_ID, name));
+		return ResourceKey.createRegistryKey(new ResourceLocation(BlueprintForge.MOD_ID, name));
 	}
 }

@@ -5,8 +5,9 @@ import com.teamabnormals.blueprint.common.block.BlueprintChiseledBookShelfBlock;
 import com.teamabnormals.blueprint.common.block.chest.BlueprintChestBlock;
 import com.teamabnormals.blueprint.common.block.chest.BlueprintTrappedChestBlock;
 import com.teamabnormals.blueprint.common.block.entity.*;
-import com.teamabnormals.blueprint.core.Blueprint;
+import com.teamabnormals.blueprint.core.BlueprintForge;
 import com.teamabnormals.blueprint.core.util.registry.BlockEntitySubRegistryHelper;
+import io.github.fabricators_of_create.porting_lib.util.RegistryObject;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.RegistryObject;
@@ -14,9 +15,9 @@ import net.minecraftforge.registries.RegistryObject;
 /**
  * Registry class for the built-in {@link BlockEntityType}s.
  */
-@Mod.EventBusSubscriber(modid = Blueprint.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
+@Mod.EventBusSubscriber(modid = BlueprintForge.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public final class BlueprintBlockEntityTypes {
-	public static final BlockEntitySubRegistryHelper HELPER = Blueprint.REGISTRY_HELPER.getBlockEntitySubHelper();
+	public static final BlockEntitySubRegistryHelper HELPER = BlueprintForge.REGISTRY_HELPER.getBlockEntitySubHelper();
 
 	public static final RegistryObject<BlockEntityType<BlueprintSignBlockEntity>> SIGN = HELPER.createBlockEntity("sign", BlueprintSignBlockEntity::new, () -> BlueprintSignBlockEntity.VALID_BLOCKS);
 	public static final RegistryObject<BlockEntityType<BlueprintHangingSignBlockEntity>> HANGING_SIGN = HELPER.createBlockEntity("hanging_sign", BlueprintHangingSignBlockEntity::new, () -> BlueprintHangingSignBlockEntity.VALID_BLOCKS);

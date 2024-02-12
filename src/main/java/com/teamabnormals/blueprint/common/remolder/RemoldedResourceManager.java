@@ -8,7 +8,7 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.JsonOps;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.teamabnormals.blueprint.common.remolder.data.MoldingTypes;
-import com.teamabnormals.blueprint.core.Blueprint;
+import com.teamabnormals.blueprint.core.BlueprintForge;
 import com.teamabnormals.blueprint.core.util.DataUtil;
 import com.teamabnormals.blueprint.core.util.modification.selection.ResourceSelector;
 import com.teamabnormals.blueprint.core.util.modification.selection.selectors.EmptyResourceSelector;
@@ -54,14 +54,14 @@ public final class RemoldedResourceManager implements CloseableResourceManager {
 		this.manager = manager;
 		this.packType = packType;
 		RemoldingCompiler.ExportEntry[] exports;
-		try (Reader reader = manager.getResourceOrThrow(new ResourceLocation(Blueprint.MOD_ID, "remolder.json")).openAsReader()) {
+		try (Reader reader = manager.getResourceOrThrow(new ResourceLocation(BlueprintForge.MOD_ID, "remolder.json")).openAsReader()) {
 			JsonElement element = GsonHelper.fromJson(GSON, reader, JsonElement.class);
 			var dataResult = Settings.CODEC.decode(JsonOps.INSTANCE, element);
 			var dataResultError = dataResult.error();
 			if (dataResultError.isPresent()) throw new JsonParseException(dataResultError.get().message());
 			exports = dataResult.result().get().getFirst().exports;
 		} catch (IOException | JsonParseException exception) {
-			Blueprint.LOGGER.error("Error loading " + packType.getDirectory() + " Remolder settings, using default settings instead!", exception);
+			BlueprintForge.LOGGER.error("Error loading " + packType.getDirectory() + " Remolder settings, using default settings instead!", exception);
 			exports = new RemoldingCompiler.ExportEntry[0];
 		}
 		this.compiler = new RemoldingCompiler(this.getClass().getClassLoader(), exports);
@@ -138,12 +138,12 @@ public final class RemoldedResourceManager implements CloseableResourceManager {
 					}
 					successfulCount.getAndIncrement();
 				} catch (IllegalArgumentException | IOException | JsonParseException exception) {
-					Blueprint.LOGGER.error("Couldn't load remolder file {} from {}", entryId, entryKey, exception);
+					BlueprintForge.LOGGER.error("Couldn't load remolder file {} from {}", entryId, entryKey, exception);
 				}
 			}, executor));
 		}
 		CompletableFuture.allOf(futures.toArray(CompletableFuture[]::new)).join();
-		Blueprint.LOGGER.info("Successfully loaded {} {} remolders!", successfulCount.get(), this.packType.getDirectory());
+		BlueprintForge.LOGGER.info("Successfully loaded {} {} remolders!", successfulCount.get(), this.packType.getDirectory());
 	}
 
 	@SuppressWarnings("unchecked")

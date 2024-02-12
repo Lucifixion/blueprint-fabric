@@ -1,7 +1,7 @@
 package com.teamabnormals.blueprint.common.network.entity;
 
 import com.teamabnormals.blueprint.client.ClientInfo;
-import com.teamabnormals.blueprint.core.Blueprint;
+import com.teamabnormals.blueprint.core.BlueprintForge;
 import com.teamabnormals.blueprint.core.endimator.Endimatable;
 import com.teamabnormals.blueprint.core.endimator.PlayableEndimation;
 import com.teamabnormals.blueprint.core.endimator.PlayableEndimationManager;
@@ -43,7 +43,7 @@ public final class MessageS2CEndimation {
 					int id = message.endimationId;
 					PlayableEndimation endimation = PlayableEndimationManager.INSTANCE.getEndimation(id);
 					if (endimation == null) {
-						Blueprint.LOGGER.warn("Could not find Playable Endimation with ID " + id + " to play, defaulting to blank.");
+						BlueprintForge.LOGGER.warn("Could not find Playable Endimation with ID " + id + " to play, defaulting to blank.");
 						endimatedEntity.resetEndimation();
 					} else {
 						endimatedEntity.setPlayingEndimation(endimation);

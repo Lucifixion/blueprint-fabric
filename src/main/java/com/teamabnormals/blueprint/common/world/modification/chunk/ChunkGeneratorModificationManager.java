@@ -4,7 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParseException;
 import com.teamabnormals.blueprint.common.world.modification.chunk.modifiers.ChunkGeneratorModifier;
-import com.teamabnormals.blueprint.core.Blueprint;
+import com.teamabnormals.blueprint.core.BlueprintForge;
 import com.teamabnormals.blueprint.core.util.DataUtil;
 import com.teamabnormals.blueprint.core.util.modification.ObjectModificationManager;
 import com.teamabnormals.blueprint.core.util.modification.ObjectModifier;
@@ -34,7 +34,7 @@ import java.util.Map;
  *
  * @author SmellyModder (Luke Tonon)
  */
-@Mod.EventBusSubscriber(modid = Blueprint.MOD_ID)
+@Mod.EventBusSubscriber(modid = BlueprintForge.MOD_ID)
 public final class ChunkGeneratorModificationManager extends SimpleJsonResourceReloadListener {
 	public static final String PATH = "dimension/chunk_generator";
 	private final EnumMap<EventPriority, LinkedList<ObjectModifierGroup<ChunkGenerator, RegistryOps<JsonElement>, RegistryOps<JsonElement>>>> prioritizedModifiers = new EnumMap<>(EventPriority.class);
@@ -102,9 +102,9 @@ public final class ChunkGeneratorModificationManager extends SimpleJsonResourceR
 				this.prioritizedModifiers.computeIfAbsent(modifierGroup.priority(), __ -> new LinkedList<>()).add(modifierGroup);
 				groupsLoaded++;
 			} catch (IllegalArgumentException | JsonParseException exception) {
-				Blueprint.LOGGER.error("Parsing error loading Chunk Generator Modifier Group: {}", location, exception);
+				BlueprintForge.LOGGER.error("Parsing error loading Chunk Generator Modifier Group: {}", location, exception);
 			}
 		}
-		Blueprint.LOGGER.info("Chunk Generator Modification Manager has loaded {} modifier groups", groupsLoaded);
+		BlueprintForge.LOGGER.info("Chunk Generator Modification Manager has loaded {} modifier groups", groupsLoaded);
 	}
 }

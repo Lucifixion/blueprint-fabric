@@ -5,7 +5,7 @@ import com.google.common.collect.HashBiMap;
 import com.google.gson.JsonParseException;
 import com.google.gson.JsonParser;
 import com.mojang.serialization.JsonOps;
-import com.teamabnormals.blueprint.core.Blueprint;
+import com.teamabnormals.blueprint.core.BlueprintForge;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.PreparableReloadListener;
 import net.minecraft.server.packs.resources.ResourceManager;
@@ -65,11 +65,11 @@ public final class EndimationLoader implements PreparableReloadListener {
 						String path = location.getPath();
 						ResourceLocation adjustedLocation = new ResourceLocation(location.getNamespace(), path.substring(12, path.length() - 5));
 						if (endimations.put(adjustedLocation, dataResult.result().get().getFirst()) != null) {
-							Blueprint.LOGGER.warn("Loaded Duplicate Endimation: {}", adjustedLocation);
+							BlueprintForge.LOGGER.warn("Loaded Duplicate Endimation: {}", adjustedLocation);
 						}
 					}
 				} catch (Exception exception) {
-					Blueprint.LOGGER.error("Error while loading Endimation: {}", entry.getKey(), exception);
+					BlueprintForge.LOGGER.error("Error while loading Endimation: {}", entry.getKey(), exception);
 				}
 			}
 			return endimations;
@@ -78,7 +78,7 @@ public final class EndimationLoader implements PreparableReloadListener {
 			registry.clear();
 			registry.putAll(endimations);
 			registry.put(PlayableEndimation.BLANK.location(), Endimation.BLANK);
-			Blueprint.LOGGER.info("Endimation Loader has loaded {} endimations", registry.size());
+			BlueprintForge.LOGGER.info("Endimation Loader has loaded {} endimations", registry.size());
 		}, executor2);
 	}
 }

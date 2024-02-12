@@ -3,7 +3,7 @@ package com.teamabnormals.blueprint.common.world.modification;
 import com.electronwill.nightconfig.core.CommentedConfig;
 import com.google.common.base.Suppliers;
 import com.mojang.datafixers.util.Pair;
-import com.teamabnormals.blueprint.core.Blueprint;
+import com.teamabnormals.blueprint.core.BlueprintForge;
 import com.teamabnormals.blueprint.core.BlueprintConfig;
 import com.teamabnormals.blueprint.core.registry.BlueprintBiomes;
 import com.teamabnormals.blueprint.core.registry.BlueprintDataPackRegistries;
@@ -55,7 +55,7 @@ public final class ModdedBiomeSlicesManager {
 		CommentedConfig moddedBiomeSliceSizes = BlueprintConfig.COMMON.moddedBiomeSliceSizes.get();
 		int defaultSize = moddedBiomeSliceSizes.getIntOrElse("default", 9);
 		if (defaultSize <= 0) {
-			Blueprint.LOGGER.warn("Found a non-positive value for the default slice size! Slice size 9 will be used instead.");
+			BlueprintForge.LOGGER.warn("Found a non-positive value for the default slice size! Slice size 9 will be used instead.");
 			defaultSize = 9;
 		}
 

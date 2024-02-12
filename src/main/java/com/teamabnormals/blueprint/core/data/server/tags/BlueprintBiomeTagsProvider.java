@@ -7,14 +7,13 @@ import net.minecraft.data.tags.BiomeTagsProvider;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.biome.MultiNoiseBiomeSourceParameterList;
-import net.minecraftforge.common.data.ExistingFileHelper;
 
 import java.util.concurrent.CompletableFuture;
 
 public class BlueprintBiomeTagsProvider extends BiomeTagsProvider {
 
-	public BlueprintBiomeTagsProvider(String modid, PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, ExistingFileHelper fileHelper) {
-		super(output, lookupProvider, modid, fileHelper);
+	public BlueprintBiomeTagsProvider(String modid, PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider) {
+		super(output, lookupProvider);
 	}
 
 	@Override

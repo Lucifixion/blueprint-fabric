@@ -2,7 +2,7 @@ package client;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.teamabnormals.blueprint.core.Blueprint;
+import com.teamabnormals.blueprint.core.BlueprintForge;
 import com.teamabnormals.blueprint.core.endimator.Endimation;
 import com.teamabnormals.blueprint.core.endimator.Endimator;
 import com.teamabnormals.blueprint.core.endimator.entity.EndimatorEntityModel;
@@ -18,7 +18,7 @@ import net.minecraft.client.model.geom.builders.PartDefinition;
 import net.minecraft.resources.ResourceLocation;
 
 public final class TestEndimatedEntityModel<E extends TestEndimatedEntity> extends EndimatorEntityModel<E> {
-	private static final Endimation IDLE = Blueprint.ENDIMATION_LOADER.getEndimation(new ResourceLocation(BlueprintTest.MOD_ID, "idle"));
+	private static final Endimation IDLE = BlueprintForge.ENDIMATION_LOADER.getEndimation(new ResourceLocation(BlueprintTest.MOD_ID, "idle"));
 	private final EndimatorModelPart cube;
 
 	public TestEndimatedEntityModel() {

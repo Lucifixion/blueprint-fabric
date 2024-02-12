@@ -1,5 +1,8 @@
 package com.teamabnormals.blueprint.core.events;
 
+import com.teamabnormals.blueprint.common.advancement.modification.AdvancementModificationManager;
+import net.fabricmc.fabric.api.event.Event;
+import net.fabricmc.fabric.api.event.EventFactory;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
@@ -10,40 +13,41 @@ import net.minecraftforge.eventbus.api.Event;
  *
  * @author SmellyModder (Luke Tonon)
  */
-public final class AdvancementBuildingEvent extends Event {
-	private final Advancement.Builder builder;
-	private final ResourceLocation location;
+public interface AdvancementBuildingEvent {
 
-	private AdvancementBuildingEvent(Advancement.Builder builder, ResourceLocation location) {
-		this.builder = builder;
-		this.location = location;
+	Event<AdvancementBuildingEvent> EVENT = EventFactory.createArrayBacked(AdvancementBuildingEvent.class,
+			(listeners) -> (builder, location) -> {
+				for (AdvancementBuildingEvent listener : listeners) {
+					AdvancementBuildingEventInstance instance = listener.instance(builder, location);
+					if (AdvancementModificationManager.getInstance() != null) AdvancementModificationManager.getInstance().applyModifiers(priority, instance.location(), instance.builder());
+				}
+				return null;
+			});
+
+	AdvancementBuildingEventInstance instance(Advancement.Builder builder, ResourceLocation location);
+
+	record AdvancementBuildingEventInstance(Advancement.Builder builder, ResourceLocation location) {
+
+		/**
+		 * Gets the {@link Advancement.Builder} of this event.
+		 *
+		 * @return The {@link Advancement.Builder} of this event.
+		 */
+		@Override
+		public Advancement.Builder builder() {
+			return this.builder;
+		}
+
+		/**
+		 * Gets the {@link ResourceLocation} name of the {@link Advancement} for this event.
+		 *
+		 * @return The {@link ResourceLocation} name of the {@link Advancement} for this event.
+		 */
+		@Override
+		public ResourceLocation location() {
+			return this.location;
+		}
 	}
 
-	/**
-	 * Fires the {@link AdvancementBuildingEvent} for a given {@link Advancement.Builder} and {@link ResourceLocation} advancement name.
-	 *
-	 * @param builder  The {@link Advancement.Builder} being built.
-	 * @param location The {@link ResourceLocation} of the {@link Advancement} being built.
-	 */
-	public static void onBuildingAdvancement(Advancement.Builder builder, ResourceLocation location) {
-		MinecraftForge.EVENT_BUS.post(new AdvancementBuildingEvent(builder, location));
-	}
 
-	/**
-	 * Gets the {@link Advancement.Builder} of this event.
-	 *
-	 * @return The {@link Advancement.Builder} of this event.
-	 */
-	public Advancement.Builder getBuilder() {
-		return this.builder;
-	}
-
-	/**
-	 * Gets the {@link ResourceLocation} name of the {@link Advancement} for this event.
-	 *
-	 * @return The {@link ResourceLocation} name of the {@link Advancement} for this event.
-	 */
-	public ResourceLocation getLocation() {
-		return this.location;
-	}
 }

@@ -1,6 +1,6 @@
 package com.teamabnormals.blueprint.common.world.storage;
 
-import com.teamabnormals.blueprint.core.Blueprint;
+import com.teamabnormals.blueprint.core.BlueprintForge;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
@@ -16,7 +16,7 @@ import net.minecraft.world.level.saveddata.SavedData;
  * @see GlobalStorage
  */
 public final class GlobalStorageManager extends SavedData {
-	private static final String KEY = Blueprint.MOD_ID + "_storage";
+	private static final String KEY = BlueprintForge.MOD_ID + "_storage";
 	private static boolean loaded = false;
 
 	private GlobalStorageManager() {

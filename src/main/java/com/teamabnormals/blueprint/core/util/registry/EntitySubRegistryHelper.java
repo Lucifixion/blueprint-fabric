@@ -1,5 +1,6 @@
 package com.teamabnormals.blueprint.core.util.registry;
 
+import io.github.fabricators_of_create.porting_lib.util.RegistryObject;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;

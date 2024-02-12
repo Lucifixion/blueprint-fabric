@@ -7,7 +7,7 @@ import com.mojang.serialization.DynamicOps;
 import com.mojang.serialization.JsonOps;
 import com.teamabnormals.blueprint.common.remolder.RemoldedResourceManager;
 import com.teamabnormals.blueprint.common.remolder.Remolding;
-import com.teamabnormals.blueprint.core.Blueprint;
+import com.teamabnormals.blueprint.core.BlueprintForge;
 import com.teamabnormals.blueprint.core.util.registry.BasicRegistry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.metadata.MetadataSectionSerializer;
@@ -74,8 +74,8 @@ public final class MoldingTypes {
 		}
 
 		private static void logFailedRemolder(Remolding<?> remolding, Exception exception, String location) {
-			Blueprint.LOGGER.error("Error while applying remolder {}: {}", remolding, exception);
-			Blueprint.LOGGER.warn("Restoring and stopping Remolder data changes at location: {}", location);
+			BlueprintForge.LOGGER.error("Error while applying remolder {}: {}", remolding, exception);
+			BlueprintForge.LOGGER.warn("Restoring and stopping Remolder data changes at location: {}", location);
 		}
 
 		@SuppressWarnings("unchecked")

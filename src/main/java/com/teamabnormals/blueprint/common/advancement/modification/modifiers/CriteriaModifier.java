@@ -14,7 +14,6 @@ import net.minecraft.advancements.CriterionTriggerInstance;
 import net.minecraft.advancements.RequirementsStrategy;
 import net.minecraft.advancements.critereon.DeserializationContext;
 import net.minecraft.util.GsonHelper;
-import net.minecraftforge.fml.util.ObfuscationReflectionHelper;
 import org.apache.commons.lang3.ArrayUtils;
 
 import javax.annotation.Nullable;
@@ -31,7 +30,16 @@ import java.util.Optional;
  * @author SmellyModder (Luke Tonon)
  */
 public record CriteriaModifier(Map<String, Criterion> criteria, Optional<String[][]> requirements, boolean shouldReplaceRequirements, Optional<List<IndexedRequirementsEntry>> indexedRequirements) implements AdvancementModifier<CriteriaModifier> {
-	public static final Field REQUIREMENTS_FIELD = ObfuscationReflectionHelper.findField(Advancement.Builder.class, "f_138337_");
+//	public static final Field REQUIREMENTS_FIELD = ObfuscationReflectionHelper.findField(Advancement.Builder.class, "f_138337_");
+	public static final Field REQUIREMENTS_FIELD;
+
+	static {
+		try {
+			REQUIREMENTS_FIELD = Advancement.Builder.class.getDeclaredField("requirementsStrategy");
+		} catch (NoSuchFieldException e) {
+			throw new RuntimeException(e);
+		}
+	}
 
 	/**
 	 * Creates a new {@link Builder} instance to simplify creation of {@link CriteriaModifier} instances.

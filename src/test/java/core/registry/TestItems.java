@@ -5,6 +5,7 @@ import com.teamabnormals.blueprint.core.util.item.CreativeModeTabContentsPopulat
 import com.teamabnormals.blueprint.core.util.registry.ItemSubRegistryHelper;
 import com.teamabnormals.blueprint.core.util.registry.RegistryHelper;
 import core.BlueprintTest;
+import io.github.fabricators_of_create.porting_lib.util.RegistryObject;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.*;

@@ -3,7 +3,7 @@ package com.teamabnormals.blueprint.common.advancement.modification;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.teamabnormals.blueprint.common.advancement.modification.modifiers.AdvancementModifier;
-import com.teamabnormals.blueprint.core.Blueprint;
+import com.teamabnormals.blueprint.core.BlueprintForge;
 import com.teamabnormals.blueprint.core.events.AdvancementBuildingEvent;
 import com.teamabnormals.blueprint.core.util.modification.ObjectModificationManager;
 import net.minecraft.advancements.Advancement.Builder;
@@ -20,7 +20,7 @@ import javax.annotation.Nullable;
  *
  * @author SmellyModder (Luke Tonon)
  */
-@Mod.EventBusSubscriber(modid = Blueprint.MOD_ID)
+@Mod.EventBusSubscriber(modid = BlueprintForge.MOD_ID)
 public final class AdvancementModificationManager extends ObjectModificationManager<Builder, Void, DeserializationContext> {
 	public static final String TARGET_PATH = "advancements";
 	private static final Gson GSON = (new GsonBuilder()).create();
@@ -35,7 +35,6 @@ public final class AdvancementModificationManager extends ObjectModificationMana
 		for (EventPriority priority : EventPriority.values()) {
 			MinecraftForge.EVENT_BUS.addListener(priority, (AdvancementBuildingEvent event) -> {
 				//Should not happen, but it's possible that this event will get fired before the manager is initialized
-				if (INSTANCE != null) INSTANCE.applyModifiers(priority, event.getLocation(), event.getBuilder());
 			});
 		}
 	}

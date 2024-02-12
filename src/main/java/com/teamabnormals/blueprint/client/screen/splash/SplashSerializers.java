@@ -1,7 +1,7 @@
 package com.teamabnormals.blueprint.client.screen.splash;
 
 import com.mojang.serialization.Codec;
-import com.teamabnormals.blueprint.core.Blueprint;
+import com.teamabnormals.blueprint.core.BlueprintForge;
 import com.teamabnormals.blueprint.core.util.registry.BasicRegistry;
 import net.minecraft.resources.ResourceLocation;
 
@@ -14,7 +14,7 @@ public final class SplashSerializers {
 	static final BasicRegistry<Codec<? extends Splash>> SPLASH_SERIALIZERS = new BasicRegistry<>();
 
 	static {
-		SPLASH_SERIALIZERS.register(new ResourceLocation(Blueprint.MOD_ID, "literal"), LiteralSplash.CODEC);
+		SPLASH_SERIALIZERS.register(new ResourceLocation(BlueprintForge.MOD_ID, "literal"), LiteralSplash.CODEC);
 	}
 
 	/**

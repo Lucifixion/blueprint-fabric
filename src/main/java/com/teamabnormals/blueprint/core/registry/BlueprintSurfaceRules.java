@@ -2,7 +2,8 @@ package com.teamabnormals.blueprint.core.registry;
 
 import com.google.common.collect.ImmutableList;
 import com.mojang.serialization.Codec;
-import com.teamabnormals.blueprint.core.Blueprint;
+import com.teamabnormals.blueprint.core.BlueprintForge;
+import io.github.fabricators_of_create.porting_lib.util.RegistryObject;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.util.KeyDispatchDataCodec;
 import net.minecraft.world.level.block.state.BlockState;
@@ -19,7 +20,7 @@ import java.util.List;
  * @author SmellyModder (Luke Tonon)
  */
 public final class BlueprintSurfaceRules extends SurfaceRules {
-	public static final DeferredRegister<Codec<? extends RuleSource>> RULE_SOURCES = DeferredRegister.create(Registries.MATERIAL_RULE, Blueprint.MOD_ID);
+	public static final DeferredRegister<Codec<? extends RuleSource>> RULE_SOURCES = DeferredRegister.create(Registries.MATERIAL_RULE, BlueprintForge.MOD_ID);
 
 	public static final RegistryObject<Codec<? extends RuleSource>> TRANSIENT_MERGED = RULE_SOURCES.register("transient_merged", TransientMergedRuleSource.CODEC::codec);
 

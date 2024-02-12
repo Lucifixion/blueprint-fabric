@@ -6,7 +6,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonParseException;
 import com.mojang.datafixers.util.Pair;
 import com.mojang.serialization.JsonOps;
-import com.teamabnormals.blueprint.core.Blueprint;
+import com.teamabnormals.blueprint.core.BlueprintForge;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.User;
 import net.minecraft.resources.ResourceLocation;
@@ -43,7 +43,7 @@ public final class BlueprintSplashManager extends SimplePreparableReloadListener
 	private IdentityHashMap<String, Splash> identifierToRandomSplash = new IdentityHashMap<>();
 
 	/**
-	 * Called in {@link Blueprint#Blueprint()} to add a listener for adding instances of {@link BlueprintSplashManager}.
+	 * Called in {@link BlueprintForge#BlueprintForge()} to add a listener for adding instances of {@link BlueprintSplashManager}.
 	 * <p><b>This is for internal use only!</b></p>
 	 *
 	 * @param event A {@link RegisterClientReloadListenersEvent} instance.
@@ -110,9 +110,9 @@ public final class BlueprintSplashManager extends SimplePreparableReloadListener
 						}
 						continue;
 					}
-					Blueprint.LOGGER.error("Couldn't load splashes file {} from {} as it is null or empty", location, resource.sourcePackId());
+					BlueprintForge.LOGGER.error("Couldn't load splashes file {} from {} as it is null or empty", location, resource.sourcePackId());
 				} catch (RuntimeException | IOException exception) {
-					Blueprint.LOGGER.error("Couldn't read splashes file {} in data pack {}", location, resource.sourcePackId(), exception);
+					BlueprintForge.LOGGER.error("Couldn't read splashes file {} in data pack {}", location, resource.sourcePackId(), exception);
 				}
 			}
 		}
@@ -124,6 +124,6 @@ public final class BlueprintSplashManager extends SimplePreparableReloadListener
 		this.eventSplashes = pair.getFirst();
 		LinkedList<Splash> eventSplashes = this.eventSplashes;
 		((SplashManagerAccessor) Minecraft.getInstance().getSplashManager()).getSplashes().addAll((this.identifierToRandomSplash = pair.getSecond()).keySet());
-		Blueprint.LOGGER.info("Blueprint Splash Manager has loaded {} splashes", eventSplashes.size() + this.identifierToRandomSplash.size());
+		BlueprintForge.LOGGER.info("Blueprint Splash Manager has loaded {} splashes", eventSplashes.size() + this.identifierToRandomSplash.size());
 	}
 }

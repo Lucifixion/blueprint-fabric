@@ -5,7 +5,7 @@ import com.google.gson.JsonNull;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
 import com.google.gson.JsonSyntaxException;
-import com.teamabnormals.blueprint.core.Blueprint;
+import com.teamabnormals.blueprint.core.BlueprintForge;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.ForgeConfigSpec;
 
@@ -18,7 +18,7 @@ import java.util.Objects;
  * @author abigailfails
  */
 public class EqualsPredicate implements IConfigPredicate {
-	private static final ResourceLocation ID = new ResourceLocation(Blueprint.MOD_ID, "equals");
+	private static final ResourceLocation ID = new ResourceLocation(BlueprintForge.MOD_ID, "equals");
 	private final Object value;
 
 	public EqualsPredicate(Object value) {
@@ -36,7 +36,7 @@ public class EqualsPredicate implements IConfigPredicate {
 	}
 
 	public static class Serializer implements IConfigPredicateSerializer<EqualsPredicate> {
-		private static final ResourceLocation ID = new ResourceLocation(Blueprint.MOD_ID, "equals");
+		private static final ResourceLocation ID = new ResourceLocation(BlueprintForge.MOD_ID, "equals");
 
 		@Override
 		public void write(JsonObject json, IConfigPredicate value) {

@@ -1,6 +1,6 @@
 package com.teamabnormals.blueprint.core.endimator;
 
-import com.teamabnormals.blueprint.core.Blueprint;
+import com.teamabnormals.blueprint.core.BlueprintForge;
 import net.minecraft.resources.ResourceLocation;
 
 import javax.annotation.Nullable;
@@ -11,16 +11,16 @@ import javax.annotation.Nullable;
  * @author SmellyModder (Luke Tonon)
  */
 public record PlayableEndimation(ResourceLocation location, int duration, LoopType loopType) {
-	public static final PlayableEndimation BLANK = new PlayableEndimation(new ResourceLocation(Blueprint.MOD_ID, "blank"), 0, LoopType.NONE);
+	public static final PlayableEndimation BLANK = new PlayableEndimation(new ResourceLocation(BlueprintForge.MOD_ID, "blank"), 0, LoopType.NONE);
 
 	/**
-	 * Looks up the {@link #location} in {@link Blueprint#ENDIMATION_LOADER} to get its corresponding {@link Endimation}.
+	 * Looks up the {@link #location} in {@link BlueprintForge#ENDIMATION_LOADER} to get its corresponding {@link Endimation}.
 	 *
 	 * @return The corresponding {@link Endimation} of the {@link #location}.
 	 */
 	@Nullable
 	public Endimation asEndimation() {
-		return Blueprint.ENDIMATION_LOADER.getEndimation(this.location);
+		return BlueprintForge.ENDIMATION_LOADER.getEndimation(this.location);
 	}
 
 	/**

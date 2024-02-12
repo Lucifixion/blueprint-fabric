@@ -8,7 +8,7 @@ import com.mojang.datafixers.util.Pair;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.teamabnormals.blueprint.common.codec.NullableFieldCodec;
-import com.teamabnormals.blueprint.core.Blueprint;
+import com.teamabnormals.blueprint.core.BlueprintForge;
 import com.teamabnormals.blueprint.core.registry.BlueprintBiomes;
 import com.teamabnormals.blueprint.core.util.registry.BasicRegistry;
 import net.minecraft.core.Holder;
@@ -46,10 +46,10 @@ public final class BiomeUtil {
 	public static final Codec<ResourceKey<Biome>> BIOME_KEY_CODEC = ResourceKey.codec(Registries.BIOME);
 
 	static {
-		MODDED_PROVIDERS.register(new ResourceLocation(Blueprint.MOD_ID, "original"), BiomeUtil.OriginalModdedBiomeProvider.CODEC);
-		MODDED_PROVIDERS.register(new ResourceLocation(Blueprint.MOD_ID, "multi_noise"), BiomeUtil.MultiNoiseModdedBiomeProvider.CODEC);
-		MODDED_PROVIDERS.register(new ResourceLocation(Blueprint.MOD_ID, "overlay"), BiomeUtil.OverlayModdedBiomeProvider.CODEC);
-		MODDED_PROVIDERS.register(new ResourceLocation(Blueprint.MOD_ID, "biome_source"), BiomeUtil.BiomeSourceModdedBiomeProvider.CODEC);
+		MODDED_PROVIDERS.register(new ResourceLocation(BlueprintForge.MOD_ID, "original"), BiomeUtil.OriginalModdedBiomeProvider.CODEC);
+		MODDED_PROVIDERS.register(new ResourceLocation(BlueprintForge.MOD_ID, "multi_noise"), BiomeUtil.MultiNoiseModdedBiomeProvider.CODEC);
+		MODDED_PROVIDERS.register(new ResourceLocation(BlueprintForge.MOD_ID, "overlay"), BiomeUtil.OverlayModdedBiomeProvider.CODEC);
+		MODDED_PROVIDERS.register(new ResourceLocation(BlueprintForge.MOD_ID, "biome_source"), BiomeUtil.BiomeSourceModdedBiomeProvider.CODEC);
 	}
 
 	/**

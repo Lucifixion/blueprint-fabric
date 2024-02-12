@@ -3,7 +3,7 @@ package core.data.server;
 import com.teamabnormals.blueprint.common.loot.modification.LootModifierProvider;
 import com.teamabnormals.blueprint.common.loot.modification.modifiers.LootPoolEntriesModifier;
 import com.teamabnormals.blueprint.common.loot.modification.modifiers.LootPoolsModifier;
-import com.teamabnormals.blueprint.core.Blueprint;
+import com.teamabnormals.blueprint.core.BlueprintForge;
 import com.teamabnormals.blueprint.core.util.modification.selection.selectors.RegexResourceSelector;
 import core.BlueprintTest;
 import net.minecraft.core.HolderLookup;
@@ -37,7 +37,7 @@ public final class TestLootModifiersProvider extends LootModifierProvider {
 
 		this.entry("igloo_chest")
 				.selects("chests/igloo_chest")
-				.addModifier(new LootPoolEntriesModifier(false, 1, LootItem.lootTableItem(Items.NETHER_STAR).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F))).setWeight(10).build()), new ModLoadedCondition(Blueprint.MOD_ID));
+				.addModifier(new LootPoolEntriesModifier(false, 1, LootItem.lootTableItem(Items.NETHER_STAR).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F))).setWeight(10).build()), new ModLoadedCondition(BlueprintForge.MOD_ID));
 
 		this.entry("vanilla_chests")
 				.selector(new RegexResourceSelector(Pattern.compile("minecraft:chests\\/.+")))

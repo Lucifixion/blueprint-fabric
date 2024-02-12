@@ -2,7 +2,7 @@ package core.data.server;
 
 import com.teamabnormals.blueprint.common.advancement.modification.AdvancementModifierProvider;
 import com.teamabnormals.blueprint.common.advancement.modification.modifiers.*;
-import com.teamabnormals.blueprint.core.Blueprint;
+import com.teamabnormals.blueprint.core.BlueprintForge;
 import com.teamabnormals.blueprint.core.util.modification.selection.selectors.ChoiceResourceSelector;
 import com.teamabnormals.blueprint.core.util.modification.selection.selectors.MultiResourceSelector;
 import com.teamabnormals.blueprint.core.util.modification.selection.selectors.NamesResourceSelector;
@@ -63,7 +63,7 @@ public final class TestAdvancementModifiersProvider extends AdvancementModifierP
 		this.entry("story_stuff")
 				.selector(
 						new MultiResourceSelector(
-								new ChoiceResourceSelector(new NamesResourceSelector("story/mine_diamond"), new NamesResourceSelector("story/mine_stone"), new ModLoadedCondition(Blueprint.MOD_ID)),
+								new ChoiceResourceSelector(new NamesResourceSelector("story/mine_diamond"), new NamesResourceSelector("story/mine_stone"), new ModLoadedCondition(BlueprintForge.MOD_ID)),
 								new NamesResourceSelector("story/root")
 						)
 				)

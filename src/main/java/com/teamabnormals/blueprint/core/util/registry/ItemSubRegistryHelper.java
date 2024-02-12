@@ -4,6 +4,7 @@ import com.mojang.datafixers.util.Pair;
 import com.teamabnormals.blueprint.common.item.BlueprintBoatItem;
 import com.teamabnormals.blueprint.common.item.FuelItem;
 import com.teamabnormals.blueprint.core.registry.BlueprintBoatTypes;
+import io.github.fabricators_of_create.porting_lib.util.RegistryObject;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;

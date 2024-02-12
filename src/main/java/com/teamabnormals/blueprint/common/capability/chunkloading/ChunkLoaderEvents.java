@@ -1,6 +1,6 @@
 package com.teamabnormals.blueprint.common.capability.chunkloading;
 
-import com.teamabnormals.blueprint.core.Blueprint;
+import com.teamabnormals.blueprint.core.BlueprintForge;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.Level;
@@ -20,7 +20,7 @@ public class ChunkLoaderEvents {
 	public void attachChunkLoaderCap(AttachCapabilitiesEvent<Level> event) {
 		Level level = event.getObject();
 		if (level instanceof ServerLevel) {
-			event.addCapability(new ResourceLocation(Blueprint.MOD_ID, "chunk_loader"), new ChunkLoaderCapability.Provider((ServerLevel) level));
+			event.addCapability(new ResourceLocation(BlueprintForge.MOD_ID, "chunk_loader"), new ChunkLoaderCapability.Provider((ServerLevel) level));
 		}
 	}
 

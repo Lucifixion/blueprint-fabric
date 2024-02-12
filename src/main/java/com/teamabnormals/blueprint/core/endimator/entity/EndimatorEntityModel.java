@@ -5,10 +5,10 @@ import com.teamabnormals.blueprint.core.endimator.Endimatable;
 import com.teamabnormals.blueprint.core.endimator.Endimation;
 import com.teamabnormals.blueprint.core.endimator.Endimator;
 import com.teamabnormals.blueprint.core.endimator.PlayableEndimation;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.world.entity.Entity;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.util.HashMap;
 
@@ -18,7 +18,7 @@ import java.util.HashMap;
  * @param <E> The type of entity for the model.
  * @author SmellyModder (Luke Tonon)
  */
-@OnlyIn(Dist.CLIENT)
+@Environment(EnvType.CLIENT)
 public abstract class EndimatorEntityModel<E extends Entity & Endimatable> extends EntityModel<E> {
 	protected Endimator endimator = new Endimator(new HashMap<>());
 	protected E entity;

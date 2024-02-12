@@ -7,6 +7,7 @@ import net.minecraft.client.User;
 import net.minecraft.client.gui.components.SplashRenderer;
 import net.minecraft.client.resources.SplashManager;
 import net.minecraft.util.RandomSource;
+import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -14,11 +15,10 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import javax.annotation.Nullable;
 import java.util.List;
 
 @Mixin(SplashManager.class)
-public final class SplashManagerMixin implements SplashManagerAccessor {
+public abstract class SplashManagerMixin implements SplashManagerAccessor {
 	@Shadow
 	@Final
 	private static RandomSource RANDOM;
@@ -29,11 +29,7 @@ public final class SplashManagerMixin implements SplashManagerAccessor {
 	@Final
 	private User user;
 
-	@Nullable
-	@Shadow
-	public SplashRenderer getSplash() {
-		return null;
-	}
+	@Shadow @Nullable public abstract SplashRenderer getSplash();
 
 	@Inject(method = "getSplash", at = @At(value = "FIELD", target = "Lnet/minecraft/client/resources/SplashManager;user:Lnet/minecraft/client/User;", shift = At.Shift.AFTER), cancellable = true)
 	private void handleBlueprintEventSplashes(CallbackInfoReturnable<SplashRenderer> info) {

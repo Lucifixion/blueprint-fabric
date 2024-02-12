@@ -1,6 +1,5 @@
 package com.teamabnormals.blueprint.core.data.server.tags;
 
-import com.teamabnormals.blueprint.core.other.tags.BlueprintBlockTags;
 import com.teamabnormals.blueprint.core.other.tags.BlueprintItemTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
@@ -8,14 +7,13 @@ import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraft.data.tags.TagsProvider;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
-import net.minecraftforge.common.data.ExistingFileHelper;
 
 import java.util.concurrent.CompletableFuture;
 
 public class BlueprintItemTagsProvider extends ItemTagsProvider {
 
-	public BlueprintItemTagsProvider(String modid, PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, CompletableFuture<TagsProvider.TagLookup<Block>> tagLookup, ExistingFileHelper fileHelper) {
-		super(output, lookupProvider, tagLookup, modid, fileHelper);
+	public BlueprintItemTagsProvider(String modid, PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, CompletableFuture<TagsProvider.TagLookup<Block>> completableFuture2) {
+		super(output, lookupProvider, completableFuture2);
 	}
 
 	@Override

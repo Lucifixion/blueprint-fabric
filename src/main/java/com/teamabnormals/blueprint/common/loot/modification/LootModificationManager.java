@@ -3,7 +3,7 @@ package com.teamabnormals.blueprint.common.loot.modification;
 import com.google.gson.*;
 import com.mojang.datafixers.util.Pair;
 import com.teamabnormals.blueprint.common.loot.modification.modifiers.LootModifier;
-import com.teamabnormals.blueprint.core.Blueprint;
+import com.teamabnormals.blueprint.core.BlueprintForge;
 import com.teamabnormals.blueprint.core.util.modification.ObjectModificationManager;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.world.level.storage.loot.*;
@@ -25,7 +25,7 @@ import java.lang.reflect.Type;
  * @author SmellyModder (Luke Tonon)
  */
 //TODO: Remove this when Remolder is real!
-@Mod.EventBusSubscriber(modid = Blueprint.MOD_ID)
+@Mod.EventBusSubscriber(modid = BlueprintForge.MOD_ID)
 public final class LootModificationManager extends ObjectModificationManager<LootTable, Gson, Pair<Gson, LootDataManager>> {
 	public static final String TARGET_DIRECTORY = "loot_tables";
 	private static final Gson GSON = Deserializers.createLootTableSerializer().registerTypeAdapter(LootPool.class, new LootPoolSerializer()).create();

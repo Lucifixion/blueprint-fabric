@@ -6,7 +6,7 @@ import com.google.gson.JsonParseException;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.teamabnormals.blueprint.common.world.modification.chunk.ChunkGeneratorModifierSerializers;
-import com.teamabnormals.blueprint.core.Blueprint;
+import com.teamabnormals.blueprint.core.BlueprintForge;
 import com.teamabnormals.blueprint.core.registry.BlueprintSurfaceRules;
 import net.minecraft.core.Holder;
 import net.minecraft.resources.RegistryOps;
@@ -62,7 +62,7 @@ public final class SurfaceRuleModifier extends UnsafeChunkGeneratorModifier<Surf
 				} else newRuleSource = new BlueprintSurfaceRules.TransientMergedRuleSource(Lists.newArrayList(this.surfaceRule, ruleSource), ruleSource);
 			}
 			UNSAFE.putObject(chunkGenerator, fieldOffset, Holder.direct(new NoiseGeneratorSettings(settings.noiseSettings(), settings.defaultBlock(), settings.defaultFluid(), settings.noiseRouter(), newRuleSource, settings.spawnTarget(), settings.seaLevel(), settings.disableMobGeneration(), settings.isAquifersEnabled(), settings.oreVeinsEnabled(), settings.useLegacyRandomSource())));
-		} else Blueprint.LOGGER.warn("Could not apply surface rule modifier because " + chunkGenerator + " was not an instance of NoiseBasedChunkGenerator");
+		} else BlueprintForge.LOGGER.warn("Could not apply surface rule modifier because " + chunkGenerator + " was not an instance of NoiseBasedChunkGenerator");
 	}
 
 	@Override

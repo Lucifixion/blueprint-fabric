@@ -1,7 +1,7 @@
 package com.teamabnormals.blueprint.core.data.server;
 
 import com.teamabnormals.blueprint.common.world.modification.ModdedBiomeSlice;
-import com.teamabnormals.blueprint.core.Blueprint;
+import com.teamabnormals.blueprint.core.BlueprintForge;
 import com.teamabnormals.blueprint.core.registry.BlueprintBiomes;
 import com.teamabnormals.blueprint.core.registry.BlueprintDataPackRegistries;
 import com.teamabnormals.blueprint.core.util.BiomeUtil;
@@ -27,7 +27,7 @@ public final class BlueprintDatapackBuiltinEntriesProvider extends DatapackBuilt
 	private static final RegistrySetBuilder BUILDER = new RegistrySetBuilder().add(Registries.BIOME, BlueprintDatapackBuiltinEntriesProvider::bootstrapBiomes).add(BlueprintDataPackRegistries.MODDED_BIOME_SLICES, BlueprintDatapackBuiltinEntriesProvider::bootstrapSlices);
 
 	public BlueprintDatapackBuiltinEntriesProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider) {
-		super(output, lookupProvider, BUILDER, Set.of(Blueprint.MOD_ID));
+		super(output, lookupProvider, BUILDER, Set.of(BlueprintForge.MOD_ID));
 	}
 
 	public static void bootstrapBiomes(BootstapContext<Biome> context) {
@@ -37,7 +37,7 @@ public final class BlueprintDatapackBuiltinEntriesProvider extends DatapackBuilt
 	}
 
 	private static void bootstrapSlices(BootstapContext<ModdedBiomeSlice> context) {
-		var originalsKey = ResourceKey.create(BlueprintDataPackRegistries.MODDED_BIOME_SLICES, new ResourceLocation(Blueprint.MOD_ID, "originals"));
+		var originalsKey = ResourceKey.create(BlueprintDataPackRegistries.MODDED_BIOME_SLICES, new ResourceLocation(BlueprintForge.MOD_ID, "originals"));
 		context.register(originalsKey, new ModdedBiomeSlice(100, BiomeUtil.OriginalModdedBiomeProvider.INSTANCE, LevelStem.OVERWORLD, LevelStem.NETHER, LevelStem.END));
 	}
 }

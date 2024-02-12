@@ -1,6 +1,6 @@
 package com.teamabnormals.blueprint.core.other.tags;
 
-import com.teamabnormals.blueprint.core.Blueprint;
+import com.teamabnormals.blueprint.core.BlueprintForge;
 import com.teamabnormals.blueprint.core.util.TagUtil;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
@@ -34,6 +34,6 @@ public class BlueprintItemTags {
 	public static final TagKey<Item> LARGE_BOATS = TagUtil.itemTag("boatload", "large_boats");
 
 	private static TagKey<Item> itemTag(String name) {
-		return TagUtil.itemTag(Blueprint.MOD_ID, name);
+		return TagUtil.itemTag(BlueprintForge.MOD_ID, name);
 	}
 }

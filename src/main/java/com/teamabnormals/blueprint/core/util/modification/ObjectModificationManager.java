@@ -5,7 +5,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParseException;
 import com.mojang.datafixers.util.Pair;
-import com.teamabnormals.blueprint.core.Blueprint;
+import com.teamabnormals.blueprint.core.BlueprintForge;
 import net.minecraft.commands.Commands;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.resources.ResourceLocation;
@@ -136,10 +136,10 @@ public class ObjectModificationManager<T, S, D> extends SimpleJsonResourceReload
 				} else assignedModifiers.getSecond().add(Pair.of(either.right().get(), groupModifiers));
 				groupsLoaded++;
 			} catch (IllegalArgumentException | JsonParseException jsonparseexception) {
-				Blueprint.LOGGER.error("Parsing error loading " + type + " Modifier Group: {}", resourcelocation, jsonparseexception);
+				BlueprintForge.LOGGER.error("Parsing error loading " + type + " Modifier Group: {}", resourcelocation, jsonparseexception);
 			}
 		}
-		Blueprint.LOGGER.info(type + " Modification Manager has loaded {} modifier groups", groupsLoaded);
+		BlueprintForge.LOGGER.info(type + " Modification Manager has loaded {} modifier groups", groupsLoaded);
 	}
 
 	/**

@@ -1,8 +1,8 @@
 package com.teamabnormals.blueprint.common.capability.chunkloading;
 
+import io.github.fabricators_of_create.porting_lib.core.util.INBTSerializable;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.Tag;
-import net.minecraftforge.common.util.INBTSerializable;
 
 /**
  * The interface used to represent a chunk loader for the chunk loader capability.

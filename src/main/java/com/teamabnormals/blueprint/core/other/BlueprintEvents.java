@@ -1,6 +1,6 @@
 package com.teamabnormals.blueprint.core.other;
 
-import com.teamabnormals.blueprint.core.Blueprint;
+import com.teamabnormals.blueprint.core.BlueprintForge;
 import com.teamabnormals.blueprint.core.other.tags.BlueprintBlockTags;
 import com.teamabnormals.blueprint.core.util.DataUtil.CustomNoteBlockInstrument;
 import com.teamabnormals.blueprint.core.util.NetworkUtil;
@@ -24,7 +24,7 @@ import java.util.List;
 /**
  * @author abigailfails
  */
-@Mod.EventBusSubscriber(modid = Blueprint.MOD_ID)
+@Mod.EventBusSubscriber(modid = BlueprintForge.MOD_ID)
 public final class BlueprintEvents {
 	public static final String NOTE_KEY = "minecraft:note";
 	public static List<CustomNoteBlockInstrument> SORTED_CUSTOM_NOTE_BLOCK_INSTRUMENTS = null;

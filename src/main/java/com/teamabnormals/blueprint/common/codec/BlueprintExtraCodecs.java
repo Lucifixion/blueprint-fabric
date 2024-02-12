@@ -6,7 +6,7 @@ import com.google.gson.JsonParseException;
 import com.mojang.datafixers.util.Either;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.DataResult;
-import com.teamabnormals.blueprint.core.Blueprint;
+import com.teamabnormals.blueprint.core.BlueprintForge;
 import com.teamabnormals.blueprint.core.util.DataUtil;
 import net.minecraft.util.ExtraCodecs;
 import net.minecraftforge.common.crafting.CraftingHelper;
@@ -43,7 +43,7 @@ public final class BlueprintExtraCodecs {
 					iConditions[i] = condition;
 				}
 			} catch (JsonParseException exception) {
-				Blueprint.LOGGER.error("Failed to lazy deserialize conditions: {}", array, exception);
+				BlueprintForge.LOGGER.error("Failed to lazy deserialize conditions: {}", array, exception);
 				return Either.right(new JsonArray());
 			}
 			return Either.left(iConditions);

@@ -2,7 +2,7 @@ package com.teamabnormals.blueprint.core.api.conditions.config;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
-import com.teamabnormals.blueprint.core.Blueprint;
+import com.teamabnormals.blueprint.core.BlueprintForge;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.ForgeConfigSpec;
 
@@ -13,7 +13,7 @@ import net.minecraftforge.common.ForgeConfigSpec;
  * @author abigailfails
  */
 public class LessThanPredicate implements IConfigPredicate {
-	private static final ResourceLocation ID = new ResourceLocation(Blueprint.MOD_ID, "less_than");
+	private static final ResourceLocation ID = new ResourceLocation(BlueprintForge.MOD_ID, "less_than");
 	private final double value;
 
 	public LessThanPredicate(double value) {
@@ -35,7 +35,7 @@ public class LessThanPredicate implements IConfigPredicate {
 	}
 
 	public static class Serializer implements IConfigPredicateSerializer<LessThanPredicate> {
-		private static final ResourceLocation ID = new ResourceLocation(Blueprint.MOD_ID, "less_than");
+		private static final ResourceLocation ID = new ResourceLocation(BlueprintForge.MOD_ID, "less_than");
 
 		@Override
 		public void write(JsonObject json, IConfigPredicate value) {

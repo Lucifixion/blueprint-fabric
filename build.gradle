@@ -1,161 +1,121 @@
-buildscript {
-    repositories {
-        maven { url = "https://files.minecraftforge.net/maven" }
-        maven { url = "https://repo.spongepowered.org/repository/maven-public/" }
+plugins {
+    id 'fabric-loom' version '1.5-SNAPSHOT'
+    id 'maven-publish'
+}
+
+version = project.modVersion
+group = project.modGroup
+
+base {
+    archivesName = project.modId
+}
+
+repositories {
+    // Add repositories to retrieve artifacts from in here.
+    // You should only use this when depending on other mods because
+    // Loom adds the essential maven repositories to download Minecraft and libraries from automatically.
+    // See https://docs.gradle.org/current/userguide/declaring_repositories.html
+    // for more information about repositories.
+    maven {
+        name = "Fuzs Mod Resources"
+        url = "https://raw.githubusercontent.com/Fuzss/modresources/main/maven/"
     }
-    dependencies {
-        classpath group: "net.minecraftforge.gradle", name: "ForgeGradle", version: "5.1.+", changing: true
-        classpath group: "org.spongepowered", name: "mixingradle", version: "0.7-SNAPSHOT"
+    maven {
+        url = "https://mvn.devos.one/snapshots/"
     }
-}
-
-apply plugin: "net.minecraftforge.gradle"
-apply plugin: "eclipse"
-apply plugin: "maven-publish"
-apply plugin: "org.spongepowered.mixin"
-
-mixin {
-    add sourceSets.main, "${project.modId}.refmap.json"
-}
-
-version = "${project.minecraft}-${project.modVersion}"
-group = "com.teamabnormals"
-archivesBaseName = project.modId
-
-java.toolchain.languageVersion = JavaLanguageVersion.of(17)
-
-minecraft {
-    mappings channel: "official", version: "${project.minecraft}"
-    accessTransformer = file("src/main/resources/META-INF/accesstransformer.cfg")
-    runs {
-        client {
-            workingDirectory project.file("run")
-            property "forge.logging.markers", "REGISTRIES"
-            property "forge.logging.console.level", "debug"
-            property "blueprint.indev", "true"
-            arg "-mixin.config=" + project.modId + ".mixins.json"
-            arg "-mixin.config=" + "blueprint_test.mixins.json"
-            mods {
-                blueprint {
-                    source sourceSets.main
-                }
-                blueprint_test {
-                    source sourceSets.test
-                }
-            }
-        }
-        server {
-            workingDirectory project.file("run")
-            property "forge.logging.markers", "REGISTRIES"
-            property "forge.logging.console.level", "debug"
-            property "blueprint.indev", "true"
-            arg "-mixin.config=" + project.modId + ".mixins.json"
-            arg "-mixin.config=" + "blueprint_test.mixins.json"
-            mods {
-                blueprint {
-                    source sourceSets.main
-                }
-                blueprint_test {
-                    source sourceSets.test
-                }
-            }
-        }
-        def blueprintDataArgs = [
-                "--mod", project.modId,
-                "--all",
-                "--output", file("src/generated/resources/"),
-                "--existing", file("src/main/resources")
-        ]
-        data {
-            workingDirectory project.file("run")
-            property "forge.logging.markers", "REGISTRIES"
-            property "forge.logging.console.level", "debug"
-            property "mixin.env.remapRefMap", "true"
-            property "mixin.env.refMapRemappingFile", "${projectDir}/build/createSrgToMcp/output.srg"
-            property "blueprint.indev", "true"
-            args blueprintDataArgs
-            mods {
-                blueprint {
-                    source sourceSets.main
-                }
-            }
-        }
-        testData {
-            parent runs.data
-
-            mods {
-                blueprint_test {
-                    source sourceSets.test
-                }
-            }
-
-            afterEvaluate {
-                //Weird trick, but forge test mods do it too
-                args.removeAll {
-                    blueprintDataArgs.contains(it instanceof File ? (it as File).absolutePath : it.toString())
-                }
-                args "--mod", "blueprint_test", "--all", "--output", file("src/generated_test/resources/"), "--existing", file("src/test/resources")
-            }
-        }
+    maven { url = "https://maven.quiltmc.org/repository/release" } // QM
+    maven { url = "https://maven.parchmentmc.org" } // Parchment
+    maven { url = "https://maven.fabricmc.net/" } // FAPI, Loader
+    maven { url = "https://mvn.devos.one/snapshots/" } // Registrate, Porting Lib, Forge Tags, Milk Lib
+    maven { // for Porting Lib: Mixin Extras, Fabric ASM
+        url = "https://jitpack.io/"
+        content { includeGroupAndSubgroups("com.github") }
     }
-}
-
-sourceSets.main.resources {
-    srcDir "src/generated/resources"
-}
-
-sourceSets.test.resources {
-    srcDir "src/generated_test/resources"
+    maven { url = "https://cursemaven.com" } // Forge Config API Port
+    maven { url = "https://maven.tterrag.com/" } // Flywheel
+    maven { url = "https://maven.shedaniel.me/" } // REI and deps
+    maven { url = "https://api.modrinth.com/maven" } // LazyDFU, Sodium, Sandwichable
+    maven { url = "https://maven.terraformersmc.com/" } // Mod Menu, Trinkets
+    maven { url = "https://squiddev.cc/maven" } // CC:T
+    maven { url = "https://modmaven.dev" } // Botania
+    maven { // Reach Entity Attributes
+        url = "https://maven.jamieswhiteshirt.com/libs-release"
+        content { includeGroup("com.jamieswhiteshirt") }
+    }
+    maven { url = "https://maven.ladysnake.org/releases" } // CCA, for Trinkets
 }
 
 dependencies {
-    minecraft "net.minecraftforge:forge:${project.minecraft}-${project.forge}"
+    // To change the versions see the gradle.properties file
+    minecraft "com.mojang:minecraft:${project.minecraft}"
+    mappings loom.officialMojangMappings()
+    modImplementation "net.fabricmc:fabric-loader:${project.fabric}"
 
-    annotationProcessor "org.spongepowered:mixin:0.8.5:processor"
+    // Fabric API. This is technically optional, but you probably want it anyway.
+    modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabricApi}"
+
+    // Forge port stuff
+    modImplementation "fuzs.forgeconfigapiport:forgeconfigapiport-fabric:${project.forgeConfigApi}"
+    for (String module in portingLibModules.split(",")) {
+        modImplementation "io.github.fabricators_of_create.Porting-Lib:$module:$portingLib"
+    }
+
+    implementation "com.google.code.findbugs:jsr305:$jsr305"
+
+    compileOnly 'org.projectlombok:lombok:1.18.30'
+    annotationProcessor 'org.projectlombok:lombok:1.18.30'
+
+    // Uncomment the following line to enable the deprecated Fabric API modules.
+    // These are included in the Fabric API production distribution and allow you to update your mod to the latest modules at a later more convenient time.
+
+    // modImplementation "net.fabricmc.fabric-api:fabric-api-deprecated:${project.fabric_version}"
+}
+
+loom {
+    accessWidenerPath = file("src/main/resources/blueprint.accesswidener")
+}
+
+processResources {
+    inputs.property "version", project.version
+
+    filesMatching("fabric.mod.json") {
+        expand "version": project.version
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    it.options.release = 17
+}
+
+java {
+    // Loom will automatically attach sourcesJar to a RemapSourcesJar task and to the "build" task
+    // if it is present.
+    // If you remove this line, sources will not be generated.
+    withSourcesJar()
+
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
 }
 
 jar {
-    manifest {
-        attributes([
-                "Specification-Title"     : project.modName,
-                "Specification-Vendor"    : "Team Abnormals",
-                "Specification-Version"   : "1",
-                "Implementation-Title"    : project.modName,
-                "Implementation-Version"  : project.modVersion,
-                "Implementation-Vendor"   : "Team Abnormals",
-                "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
-                "MixinConfigs"            : project.modId + ".mixins.json"
-        ])
+    from("LICENSE") {
+        rename { "${it}_${project.base.archivesName.get()}"}
     }
-    finalizedBy "reobfJar"
 }
 
-task sourcesJar(type: Jar) {
-    duplicatesStrategy(DuplicatesStrategy.FAIL)
-    archiveClassifier.set("sources")
-    from sourceSets.main.allJava
-}
-
-artifacts {
-    archives sourcesJar
-}
-
+// configure the maven publication
 publishing {
     publications {
-        maven(MavenPublication) {
-            artifact jar
-            artifact sourcesJar
+        mavenJava(MavenPublication) {
+            from components.java
         }
     }
+
+    // See https://docs.gradle.org/current/userguide/publishing_maven.html for information on how to set up publishing.
     repositories {
-        if (project.hasProperty("jacksonMavenUser") && project.hasProperty("jacksonMavenPass")) {
-            maven {
-                url "https://maven.jaackson.me"
-                credentials {
-                    username = project.properties.jacksonMavenUser
-                    password = project.properties.jacksonMavenPass
-                }
-            }
-        }
+        // Add repositories to publish to here.
+        // Notice: This block does NOT have the same function as the block in the top level.
+        // The repositories here will be used for publishing your artifact, not for
+        // retrieving dependencies.
     }
 }

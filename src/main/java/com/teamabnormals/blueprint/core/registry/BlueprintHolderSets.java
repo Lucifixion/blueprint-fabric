@@ -5,7 +5,7 @@ import com.mojang.datafixers.util.Either;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.teamabnormals.blueprint.common.codec.BlueprintExtraCodecs;
-import com.teamabnormals.blueprint.core.Blueprint;
+import com.teamabnormals.blueprint.core.BlueprintForge;
 import net.minecraft.core.*;
 import net.minecraft.resources.HolderSetCodec;
 import net.minecraft.resources.RegistryOps;
@@ -29,7 +29,7 @@ import java.util.stream.Collectors;
  * @author SmellyModder (Luke Tonon)
  */
 public final class BlueprintHolderSets {
-	public static final DeferredRegister<HolderSetType> HOLDER_SET_TYPES = DeferredRegister.create(ForgeRegistries.Keys.HOLDER_SET_TYPES, Blueprint.MOD_ID);
+	public static final DeferredRegister<HolderSetType> HOLDER_SET_TYPES = DeferredRegister.create(ForgeRegistries.Keys.HOLDER_SET_TYPES, BlueprintForge.MOD_ID);
 
 	public static final RegistryObject<HolderSetType> CONDITIONAL = HOLDER_SET_TYPES.register("conditional", () -> ConditionalHolderSet::codec);
 

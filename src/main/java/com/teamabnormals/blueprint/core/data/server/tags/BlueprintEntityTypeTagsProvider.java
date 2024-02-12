@@ -5,14 +5,13 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.EntityTypeTagsProvider;
 import net.minecraft.world.entity.EntityType;
-import net.minecraftforge.common.data.ExistingFileHelper;
 
 import java.util.concurrent.CompletableFuture;
 
 public class BlueprintEntityTypeTagsProvider extends EntityTypeTagsProvider {
 
-	public BlueprintEntityTypeTagsProvider(String modid, PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, ExistingFileHelper fileHelper) {
-		super(output, lookupProvider, modid, fileHelper);
+	public BlueprintEntityTypeTagsProvider(String modid, PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider) {
+		super(output, lookupProvider);
 	}
 
 	@Override

@@ -1,9 +1,9 @@
 package com.teamabnormals.blueprint.core.api;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.renderer.Sheets;
 import net.minecraft.world.level.block.state.properties.WoodType;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.util.HashMap;
 
@@ -13,7 +13,7 @@ import java.util.HashMap;
 public final class WoodTypeRegistryHelper {
 	private static final HashMap<String, WoodType> WOOD_TYPES = new HashMap<>();
 
-	@OnlyIn(Dist.CLIENT)
+	@Environment(EnvType.CLIENT)
 	public static void setupAtlas() {
 		for (WoodType woodType : WOOD_TYPES.values()) Sheets.addWoodType(woodType);
 	}

@@ -5,7 +5,7 @@ import com.teamabnormals.blueprint.client.RewardHandler;
 import com.teamabnormals.blueprint.client.RewardHandler.RewardProperties;
 import com.teamabnormals.blueprint.client.model.SlabfishHatModel;
 import com.teamabnormals.blueprint.common.world.storage.tracking.IDataManager;
-import com.teamabnormals.blueprint.core.Blueprint;
+import com.teamabnormals.blueprint.core.BlueprintForge;
 import com.teamabnormals.blueprint.core.sonar.OnlineImageCache;
 import net.minecraft.client.model.PlayerModel;
 import net.minecraft.client.model.geom.ModelPart;
@@ -24,7 +24,7 @@ import java.util.concurrent.TimeUnit;
  * <p>For more information, visit the <a href="https://www.patreon.com/teamabnormals">Patreon</a>></p>
  */
 public class SlabfishHatRenderLayer extends RenderLayer<AbstractClientPlayer, PlayerModel<AbstractClientPlayer>> {
-	public static OnlineImageCache REWARD_CACHE = new OnlineImageCache(Blueprint.MOD_ID, 1, TimeUnit.DAYS);
+	public static OnlineImageCache REWARD_CACHE = new OnlineImageCache(BlueprintForge.MOD_ID, 1, TimeUnit.DAYS);
 	private final SlabfishHatModel model;
 
 	public SlabfishHatRenderLayer(PlayerRenderer renderer) {

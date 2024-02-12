@@ -2,7 +2,7 @@ package com.teamabnormals.blueprint.core.api.conditions.config;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
-import com.teamabnormals.blueprint.core.Blueprint;
+import com.teamabnormals.blueprint.core.BlueprintForge;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
 import net.minecraftforge.common.ForgeConfigSpec;
@@ -14,7 +14,7 @@ import net.minecraftforge.common.ForgeConfigSpec;
  * @author abigailfails
  */
 public class MatchesPredicate implements IConfigPredicate {
-	private static final ResourceLocation ID = new ResourceLocation(Blueprint.MOD_ID, "matches");
+	private static final ResourceLocation ID = new ResourceLocation(BlueprintForge.MOD_ID, "matches");
 	private final String regex;
 
 	public MatchesPredicate(String regex) {
@@ -35,7 +35,7 @@ public class MatchesPredicate implements IConfigPredicate {
 	}
 
 	public static class Serializer implements IConfigPredicateSerializer<MatchesPredicate> {
-		private static final ResourceLocation ID = new ResourceLocation(Blueprint.MOD_ID, "matches");
+		private static final ResourceLocation ID = new ResourceLocation(BlueprintForge.MOD_ID, "matches");
 
 		@Override
 		public void write(JsonObject json, IConfigPredicate value) {

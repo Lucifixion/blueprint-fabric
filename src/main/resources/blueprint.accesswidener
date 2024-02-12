@@ -1,0 +1,17 @@
+accessWidener v2 named
+
+accessible method net/minecraft/world/level/block/FireBlock setFlammable (Lnet/minecraft/world/level/block/Block;II)V
+accessible field net/minecraft/world/entity/ai/behavior/GiveGiftToHero GIFTS Ljava/util/Map;
+accessible field net/minecraft/world/entity/animal/Parrot MOB_SOUND_MAP Ljava/util/Map;
+accessible field net/minecraft/world/level/block/entity/DecoratedPotPatterns ITEM_TO_POT_TEXTURE Ljava/util/Map;
+accessible field net/minecraft/client/gui/components/SplashRenderer splash Ljava/lang/String;
+accessible field net/minecraft/world/entity/animal/Chicken FOOD_ITEMS Lnet/minecraft/world/item/crafting/Ingredient;
+accessible field net/minecraft/world/entity/animal/Pig FOOD_ITEMS Lnet/minecraft/world/item/crafting/Ingredient;
+accessible field net/minecraft/world/entity/monster/Strider FOOD_ITEMS Lnet/minecraft/world/item/crafting/Ingredient;
+accessible field net/minecraft/world/entity/monster/Strider TEMPT_ITEMS Lnet/minecraft/world/item/crafting/Ingredient;
+accessible field net/minecraft/world/entity/animal/Ocelot TEMPT_INGREDIENT Lnet/minecraft/world/item/crafting/Ingredient;
+accessible field net/minecraft/world/entity/animal/Cat TEMPT_INGREDIENT Lnet/minecraft/world/item/crafting/Ingredient;
+accessible field net/minecraft/client/Minecraft pausePartialTick F
+accessible field net/minecraft/client/model/geom/ModelPart children Ljava/util/Map;
+extendable class net/minecraft/client/model/geom/ModelPart
+accessible field net/minecraft/client/renderer/BlockEntityWithoutLevelRenderer blockEntityRenderDispatcher Lnet/minecraft/client/renderer/blockentity/BlockEntityRenderDispatcher;

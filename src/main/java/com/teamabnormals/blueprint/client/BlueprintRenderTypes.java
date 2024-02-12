@@ -2,7 +2,7 @@ package com.teamabnormals.blueprint.client;
 
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import com.mojang.blaze3d.vertex.VertexFormat;
-import com.teamabnormals.blueprint.core.Blueprint;
+import com.teamabnormals.blueprint.core.BlueprintForge;
 import net.minecraft.client.renderer.RenderStateShard;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceLocation;
@@ -29,7 +29,7 @@ public final class BlueprintRenderTypes extends RenderType {
 	 */
 	public static RenderType getUnshadedCutoutEntity(ResourceLocation texture, boolean outline) {
 		RenderType.CompositeState state = RenderType.CompositeState.builder().setTextureState(new RenderStateShard.TextureStateShard(texture, false, false)).setShaderState(RENDERTYPE_ENTITY_UNSHADED_CUTOUT_SHADER).setTransparencyState(NO_TRANSPARENCY).setCullState(NO_CULL).setLightmapState(LIGHTMAP).setOverlayState(OVERLAY).createCompositeState(outline);
-		return create(Blueprint.MOD_ID + ":entity_unshaded_cutout", DefaultVertexFormat.NEW_ENTITY, VertexFormat.Mode.QUADS, 256, true, false, state);
+		return create(BlueprintForge.MOD_ID + ":entity_unshaded_cutout", DefaultVertexFormat.NEW_ENTITY, VertexFormat.Mode.QUADS, 256, true, false, state);
 	}
 
 	/**
@@ -41,6 +41,6 @@ public final class BlueprintRenderTypes extends RenderType {
 	 */
 	public static RenderType getUnshadedTranslucentEntity(ResourceLocation texture, boolean outline) {
 		RenderType.CompositeState state = RenderType.CompositeState.builder().setTextureState(new RenderStateShard.TextureStateShard(texture, false, false)).setShaderState(RENDERTYPE_ENTITY_UNSHADED_TRANSLUCENT_SHADER).setTransparencyState(TRANSLUCENT_TRANSPARENCY).setCullState(NO_CULL).setLightmapState(LIGHTMAP).setOverlayState(OVERLAY).createCompositeState(outline);
-		return create(Blueprint.MOD_ID + ":entity_unshaded_translucent", DefaultVertexFormat.NEW_ENTITY, VertexFormat.Mode.QUADS, 256, true, true, state);
+		return create(BlueprintForge.MOD_ID + ":entity_unshaded_translucent", DefaultVertexFormat.NEW_ENTITY, VertexFormat.Mode.QUADS, 256, true, true, state);
 	}
 }

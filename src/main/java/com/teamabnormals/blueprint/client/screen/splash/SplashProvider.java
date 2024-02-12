@@ -2,7 +2,7 @@ package com.teamabnormals.blueprint.client.screen.splash;
 
 import com.google.gson.JsonParseException;
 import com.mojang.serialization.JsonOps;
-import com.teamabnormals.blueprint.core.Blueprint;
+import com.teamabnormals.blueprint.core.BlueprintForge;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataProvider;
 import net.minecraft.data.PackOutput;
@@ -61,7 +61,7 @@ public abstract class SplashProvider implements DataProvider {
 			if (error.isPresent()) throw new JsonParseException(error.get().message());
 			return DataProvider.saveStable(cachedOutput, dataResult.result().get(), resolvedPath);
 		} catch (JsonParseException e) {
-			Blueprint.LOGGER.error("Couldn't save splashes {}", resolvedPath, e);
+			BlueprintForge.LOGGER.error("Couldn't save splashes {}", resolvedPath, e);
 			return CompletableFuture.completedFuture(null);
 		}
 	}

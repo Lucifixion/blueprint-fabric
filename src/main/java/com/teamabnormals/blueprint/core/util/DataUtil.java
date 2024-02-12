@@ -4,12 +4,15 @@ import com.google.common.collect.Maps;
 import com.google.gson.JsonElement;
 import com.mojang.datafixers.util.Pair;
 import com.mojang.serialization.JsonOps;
-import com.teamabnormals.blueprint.core.Blueprint;
+import com.teamabnormals.blueprint.core.BlueprintForge;
 import com.teamabnormals.blueprint.core.annotations.ConfigKey;
 import com.teamabnormals.blueprint.core.api.conditions.ConfigValueCondition;
 import com.teamabnormals.blueprint.core.api.conditions.config.IConfigPredicate;
 import com.teamabnormals.blueprint.core.api.conditions.config.IConfigPredicateSerializer;
 import com.teamabnormals.blueprint.core.api.conditions.loot.ConfigLootCondition;
+import io.github.fabricators_of_create.porting_lib.util.RegistryObject;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.Util;
 import net.minecraft.client.color.block.BlockColor;
 import net.minecraft.client.color.block.BlockColors;
@@ -39,8 +42,6 @@ import net.minecraft.world.level.block.entity.DecoratedPotPatterns;
 import net.minecraft.world.level.levelgen.structure.pools.StructurePoolElement;
 import net.minecraft.world.level.levelgen.structure.pools.StructureTemplatePool;
 import net.minecraft.world.level.storage.loot.predicates.LootItemConditionType;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.event.server.ServerAboutToStartEvent;
@@ -68,7 +69,7 @@ import java.util.function.Predicate;
  * @author SmellyModder (Luke Tonon)
  * @author abigailfails
  */
-@Mod.EventBusSubscriber(modid = Blueprint.MOD_ID)
+@Mod.EventBusSubscriber(modid = BlueprintForge.MOD_ID)
 public final class DataUtil {
 	public static final Field TAG_MANAGER = ObfuscationReflectionHelper.findField(ReloadableServerResources.class, "f_206849_");
 	public static final Field REGISTRY_ACCESS = ObfuscationReflectionHelper.findField(TagManager.class, "f_144569_");
@@ -137,7 +138,7 @@ public final class DataUtil {
 	 * @param color       A {@link BlockColor} to use.
 	 * @param blocksIn    A list of blocks to register.
 	 */
-	@OnlyIn(Dist.CLIENT)
+	@Environment(EnvType.CLIENT)
 	public static void registerBlockColor(BlockColors blockColors, BlockColor color, List<RegistryObject<Block>> blocksIn) {
 		blocksIn.removeIf(block -> !block.isPresent());
 		if (blocksIn.size() > 0) {
@@ -156,7 +157,7 @@ public final class DataUtil {
 	 * @param color      An {@link ItemColor} to use.
 	 * @param blocksIn   A list of blocks to register.
 	 */
-	@OnlyIn(Dist.CLIENT)
+	@Environment(EnvType.CLIENT)
 	public static void registerBlockItemColor(ItemColors itemColors, ItemColor color, List<RegistryObject<Block>> blocksIn) {
 		blocksIn.removeIf(block -> !block.isPresent());
 		if (blocksIn.size() > 0) {

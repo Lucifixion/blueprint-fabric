@@ -5,7 +5,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
-import com.teamabnormals.blueprint.core.Blueprint;
+import com.teamabnormals.blueprint.core.BlueprintForge;
 import com.teamabnormals.blueprint.core.util.modification.selection.ConditionedResourceSelector;
 import net.minecraft.util.GsonHelper;
 import net.minecraftforge.common.crafting.CraftingHelper;
@@ -66,7 +66,7 @@ public record ObjectModifierGroup<T, S, D>(ConditionedResourceSelector selector,
 		EventPriority priority = allowPriority ? deserializePriority(object) : EventPriority.NORMAL;
 		ConditionedResourceSelector selector = ConditionedResourceSelector.deserialize("selector", object.get("selector"));
 		if (selector == ConditionedResourceSelector.EMPTY) {
-			if (logSkipping) Blueprint.LOGGER.info("Skipped modifier group named '" + name + "' as its conditions were not met");
+			if (logSkipping) BlueprintForge.LOGGER.info("Skipped modifier group named '" + name + "' as its conditions were not met");
 			return new ObjectModifierGroup<>(selector, ImmutableList.of(), priority);
 		}
 		List<ObjectModifier<T, S, D, ?>> objectModifiers = new ArrayList<>();
@@ -79,7 +79,7 @@ public record ObjectModifierGroup<T, S, D>(ConditionedResourceSelector selector,
 				JsonElement config = entry.get("config");
 				if (config == null) throw new JsonParseException("Missing 'config' element!");
 				objectModifiers.add(serializer.deserialize(config, additional));
-			} else if (logSkipping) Blueprint.LOGGER.info("Skipped modifier named '" + name + "' as its conditions were not met");
+			} else if (logSkipping) BlueprintForge.LOGGER.info("Skipped modifier named '" + name + "' as its conditions were not met");
 		});
 		return new ObjectModifierGroup<>(selector, objectModifiers, priority);
 	}

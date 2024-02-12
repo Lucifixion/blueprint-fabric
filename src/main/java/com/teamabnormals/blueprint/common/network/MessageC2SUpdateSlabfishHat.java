@@ -1,7 +1,7 @@
 package com.teamabnormals.blueprint.common.network;
 
 import com.teamabnormals.blueprint.common.world.storage.tracking.IDataManager;
-import com.teamabnormals.blueprint.core.Blueprint;
+import com.teamabnormals.blueprint.core.BlueprintForge;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.fml.LogicalSide;
@@ -35,7 +35,7 @@ public final class MessageC2SUpdateSlabfishHat {
 			context.enqueueWork(() -> {
 				ServerPlayer player = context.getSender();
 				if (player instanceof IDataManager)
-					((IDataManager) player).setValue(Blueprint.SLABFISH_SETTINGS, message.setting);
+					((IDataManager) player).setValue(BlueprintForge.SLABFISH_SETTINGS, message.setting);
 			});
 			context.setPacketHandled(true);
 		}

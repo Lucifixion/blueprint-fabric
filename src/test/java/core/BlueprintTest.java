@@ -7,7 +7,7 @@ import com.teamabnormals.blueprint.common.world.storage.GlobalStorage;
 import com.teamabnormals.blueprint.common.world.storage.tracking.DataProcessors;
 import com.teamabnormals.blueprint.common.world.storage.tracking.TrackedData;
 import com.teamabnormals.blueprint.common.world.storage.tracking.TrackedDataManager;
-import com.teamabnormals.blueprint.core.Blueprint;
+import com.teamabnormals.blueprint.core.BlueprintForge;
 import com.teamabnormals.blueprint.core.events.AnimateTickEvents;
 import com.teamabnormals.blueprint.core.util.BiomeUtil;
 import com.teamabnormals.blueprint.core.util.DataUtil;
@@ -90,7 +90,7 @@ public final class BlueprintTest {
 			DataUtil.addParrotFood(Items.ALLIUM, Items.ALLAY_SPAWN_EGG);
 			DataUtil.registerDecoratedPotPattern(Pair.of(TestItems.ITEM.get(), TestItems.TEST_POTTERY_SHERD));
 		});
-		DataUtil.registerNoteBlockInstrument(new DataUtil.CustomNoteBlockInstrument(Blueprint.MOD_ID, source -> source.getBlockState().is(BlockTags.IRON_ORES), SoundEvents.BELL_BLOCK));
+		DataUtil.registerNoteBlockInstrument(new DataUtil.CustomNoteBlockInstrument(BlueprintForge.MOD_ID, source -> source.getBlockState().is(BlockTags.IRON_ORES), SoundEvents.BELL_BLOCK));
 		DataUtil.registerNoteBlockInstrument(new DataUtil.CustomNoteBlockInstrument(BlueprintTest.MOD_ID, source -> source.getBlockState().is(Blocks.LODESTONE), SoundEvents.SHIELD_BREAK, (id1, id2) -> id2.equals("blueprint") ? -1 : 0));
 		DataUtil.addToJigsawPattern(new ResourceLocation("village/plains/decor"), registryAccess -> {
 			return StructurePoolElement.feature(registryAccess.registryOrThrow(Registries.PLACED_FEATURE).getHolderOrThrow(CavePlacements.SCULK_PATCH_ANCIENT_CITY)).apply(StructureTemplatePool.Projection.RIGID);

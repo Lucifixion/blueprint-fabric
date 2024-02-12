@@ -1,0 +1,36 @@
+{
+	"schemaVersion": 1,
+	"id": "blueprint",
+	"version": "${version}",
+	"name": "Blueprint",
+	"description": "The library mod used by all Abnormals mods. Adds support for various types of blocks, helps with registering, and adds tons of misc. utils.\nAlso comes with Endimator, an animation library that supports data-driven and coded animations",
+	"authors": [
+		"Team Abnormals",
+		"GoopSwagger"
+	],
+	"contact": {
+		"homepage": "",
+		"sources": ""
+	},
+	"accessWidener": "blueprint.accesswidener",
+	"license": "Custom",
+	"icon": "assets/blueprint/textures/blueprint.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"com.teamabnormals.blueprint.core.Blueprint"
+		],
+		"client": [
+			"com.teamabnormals.blueprint.client.BlueprintClient"
+		]
+	},
+	"mixins": [
+		"blueprint.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.15.6",
+		"minecraft": "~1.20.1",
+		"java": ">=17",
+		"fabric-api": "*"
+	}
+}

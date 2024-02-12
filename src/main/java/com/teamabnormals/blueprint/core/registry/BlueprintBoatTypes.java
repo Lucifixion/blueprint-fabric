@@ -1,6 +1,8 @@
 package com.teamabnormals.blueprint.core.registry;
 
 import com.mojang.datafixers.util.Pair;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.model.*;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
@@ -12,8 +14,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 
 import javax.annotation.Nullable;
@@ -60,7 +60,7 @@ public final class BlueprintBoatTypes {
 		return BOATS.get(name);
 	}
 
-	@OnlyIn(Dist.CLIENT)
+	@Environment(EnvType.CLIENT)
 	public static void registerLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event) {
 		LayerDefinition boatModel = BoatModel.createBodyModel();
 		LayerDefinition chestBoatModel = ChestBoatModel.createBodyModel();
@@ -74,14 +74,14 @@ public final class BlueprintBoatTypes {
 		});
 	}
 
-	@OnlyIn(Dist.CLIENT)
+	@Environment(EnvType.CLIENT)
 	public static IdentityHashMap<BlueprintBoatType, Pair<ResourceLocation, ListModel<Boat>>> createBoatResources(EntityRendererProvider.Context context, boolean chest) {
 		IdentityHashMap<BlueprintBoatType, Pair<ResourceLocation, ListModel<Boat>>> boatTypeToModel = new IdentityHashMap<>();
 		BOATS.values().forEach(type -> boatTypeToModel.put(type, Pair.of(chest ? type.getChestVariantTexture() : type.getTexture(), createBoatModel(context, type, chest))));
 		return boatTypeToModel;
 	}
 
-	@OnlyIn(Dist.CLIENT)
+	@Environment(EnvType.CLIENT)
 	private static ListModel<Boat> createBoatModel(EntityRendererProvider.Context context, BlueprintBoatType type, boolean chest) {
 		ModelPart modelpart = context.bakeLayer(chest ? type.getChestBoatModelLayerLocation() : type.getBoatModelLayerLocation());
 		if (type.isRaft()) {
@@ -185,7 +185,7 @@ public final class BlueprintBoatTypes {
 		 *
 		 * @return The {@link ModelLayerLocation} instance for accessing this type's model.
 		 */
-		@OnlyIn(Dist.CLIENT)
+		@Environment(EnvType.CLIENT)
 		public ModelLayerLocation getBoatModelLayerLocation() {
 			ResourceLocation name = this.getName();
 			String namespace = name.getNamespace();
@@ -198,7 +198,7 @@ public final class BlueprintBoatTypes {
 		 *
 		 * @return The {@link ModelLayerLocation} instance for accessing this type's chest-variant model.
 		 */
-		@OnlyIn(Dist.CLIENT)
+		@Environment(EnvType.CLIENT)
 		public ModelLayerLocation getChestBoatModelLayerLocation() {
 			ResourceLocation name = this.getName();
 			String namespace = name.getNamespace();

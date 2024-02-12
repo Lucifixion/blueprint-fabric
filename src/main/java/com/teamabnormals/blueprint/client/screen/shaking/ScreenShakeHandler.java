@@ -1,14 +1,14 @@
 package com.teamabnormals.blueprint.client.screen.shaking;
 
-import com.teamabnormals.blueprint.core.Blueprint;
+import com.teamabnormals.blueprint.core.BlueprintForge;
 import com.teamabnormals.blueprint.core.BlueprintConfig;
 import com.teamabnormals.blueprint.core.mixin.client.CameraInvokerMixin;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.ClientPlayerNetworkEvent.LoggingOut;
 import net.minecraftforge.client.event.ViewportEvent;
 import net.minecraftforge.event.TickEvent;
@@ -29,7 +29,7 @@ import java.util.Random;
  * @author SmellyModder (Luke Tonon)
  * @see ShakeSource
  */
-@Mod.EventBusSubscriber(modid = Blueprint.MOD_ID, value = Dist.CLIENT)
+@Mod.EventBusSubscriber(modid = BlueprintForge.MOD_ID, value = Dist.CLIENT)
 public enum ScreenShakeHandler {
 	INSTANCE;
 
@@ -38,7 +38,7 @@ public enum ScreenShakeHandler {
 	private double prevIntensityX, prevIntensityY, prevIntensityZ;
 	private double intensityX, intensityY, intensityZ;
 
-	@OnlyIn(Dist.CLIENT)
+	@Environment(EnvType.CLIENT)
 	@SubscribeEvent
 	public static void onClientTick(TickEvent.ClientTickEvent event) {
 		if (event.phase == TickEvent.Phase.START) {
@@ -46,19 +46,19 @@ public enum ScreenShakeHandler {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
+	@Environment(EnvType.CLIENT)
 	@SubscribeEvent
 	public static void onCameraSetup(ViewportEvent.ComputeCameraAngles event) {
 		INSTANCE.shakeCamera(event);
 	}
 
-	@OnlyIn(Dist.CLIENT)
+	@Environment(EnvType.CLIENT)
 	@SubscribeEvent
 	public static void onPlayerLoggedOut(LoggingOut event) {
 		INSTANCE.clear();
 	}
 
-	@OnlyIn(Dist.CLIENT)
+	@Environment(EnvType.CLIENT)
 	@SubscribeEvent
 	public static void onWorldUnload(LevelEvent.Unload event) {
 		INSTANCE.clear();

@@ -6,7 +6,7 @@ import com.teamabnormals.blueprint.common.world.storage.tracking.IDataManager;
 import com.teamabnormals.blueprint.common.world.storage.tracking.SyncType;
 import com.teamabnormals.blueprint.common.world.storage.tracking.TrackedData;
 import com.teamabnormals.blueprint.common.world.storage.tracking.TrackedDataManager;
-import com.teamabnormals.blueprint.core.Blueprint;
+import com.teamabnormals.blueprint.core.BlueprintForge;
 import com.teamabnormals.blueprint.core.endimator.Endimatable;
 import com.teamabnormals.blueprint.core.events.EntityStepEvent;
 import net.minecraft.core.BlockPos;
@@ -156,7 +156,7 @@ public abstract class EntityMixin implements IDataManager, Endimatable {
 					dataEntry.readValue(dataTag, true);
 					this.dataMap.put(trackedData, dataEntry);
 				} else if (trackedData == null) {
-					Blueprint.LOGGER.warn("Received NBT for unknown Tracked Data: {}", id);
+					BlueprintForge.LOGGER.warn("Received NBT for unknown Tracked Data: {}", id);
 				}
 			});
 		}
@@ -169,7 +169,8 @@ public abstract class EntityMixin implements IDataManager, Endimatable {
 
 	@Redirect(method = "move", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/Block;stepOn(Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/world/entity/Entity;)V"))
 	private void onIsSteppingCarefully(Block block, Level level, BlockPos pos, BlockState state, Entity entity) {
-		if (!EntityStepEvent.onEntityStep(this.level, this.getOnPos(), state, entity)) {
+		//		if (!EntityStepEvent.onEntityStep(this.level, this.getOnPos(), state, entity)) {
+		if (!EntityStepEvent.EVENT.invoker().instance(level, pos, state, entity)) {
 			block.stepOn(level, pos, state, entity);
 		}
 	}

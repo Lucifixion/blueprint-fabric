@@ -5,7 +5,7 @@ import com.teamabnormals.blueprint.common.world.modification.ModdedBiomeSlice;
 import com.teamabnormals.blueprint.common.world.modification.structure.SimpleStructureRepaletter;
 import com.teamabnormals.blueprint.common.world.modification.structure.StructureRepaletterEntry;
 import com.teamabnormals.blueprint.common.world.modification.structure.WeightedStructureRepaletter;
-import com.teamabnormals.blueprint.core.Blueprint;
+import com.teamabnormals.blueprint.core.BlueprintForge;
 import com.teamabnormals.blueprint.core.data.server.BlueprintDatapackBuiltinEntriesProvider;
 import com.teamabnormals.blueprint.core.registry.BlueprintBiomes;
 import com.teamabnormals.blueprint.core.registry.BlueprintDataPackRegistries;
@@ -49,7 +49,7 @@ public final class TestDatapackBuiltinEntriesProvider extends DatapackBuiltinEnt
 		context.register(
 				repaletterKey("planks_become_random_planks_in_mineshafts"),
 				new StructureRepaletterEntry(
-						BlueprintHolderSets.conditional(HolderSet.direct(structures.getOrThrow(BuiltinStructures.MINESHAFT)), new ModLoadedCondition(Blueprint.MOD_ID)),
+						BlueprintHolderSets.conditional(HolderSet.direct(structures.getOrThrow(BuiltinStructures.MINESHAFT)), new ModLoadedCondition(BlueprintForge.MOD_ID)),
 						Optional.empty(),
 						false,
 						new WeightedStructureRepaletter(BlockTags.PLANKS, WeightedRandomList.create(WeightedEntry.wrap(Blocks.ACACIA_PLANKS, 1), WeightedEntry.wrap(Blocks.BIRCH_PLANKS, 1)))

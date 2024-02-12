@@ -7,17 +7,17 @@ import com.teamabnormals.blueprint.common.network.entity.MessageS2CTeleportEntit
 import com.teamabnormals.blueprint.common.network.entity.MessageS2CUpdateEntityData;
 import com.teamabnormals.blueprint.common.network.particle.MessageS2CSpawnParticle;
 import com.teamabnormals.blueprint.common.world.storage.tracking.IDataManager;
-import com.teamabnormals.blueprint.core.Blueprint;
+import com.teamabnormals.blueprint.core.BlueprintForge;
 import com.teamabnormals.blueprint.core.endimator.Endimatable;
 import com.teamabnormals.blueprint.core.endimator.PlayableEndimation;
 import com.teamabnormals.blueprint.core.endimator.PlayableEndimationManager;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.network.PacketDistributor;
 
 import java.util.Set;
@@ -41,7 +41,7 @@ public final class NetworkUtil {
 	 * @param motionZ The y motion of the particle.
 	 */
 	public static void spawnParticle(String name, double posX, double posY, double posZ, double motionX, double motionY, double motionZ) {
-		Blueprint.CHANNEL.send(PacketDistributor.ALL.with(() -> null), new MessageS2CSpawnParticle(name, posX, posY, posZ, motionX, motionY, motionZ));
+		BlueprintForge.CHANNEL.send(PacketDistributor.ALL.with(() -> null), new MessageS2CSpawnParticle(name, posX, posY, posZ, motionX, motionY, motionZ));
 	}
 
 	/**
@@ -59,7 +59,7 @@ public final class NetworkUtil {
 	 * @param motionZ   The y motion of the particle.
 	 */
 	public static void spawnParticle(String name, ResourceKey<Level> dimension, double posX, double posY, double posZ, double motionX, double motionY, double motionZ) {
-		Blueprint.CHANNEL.send(PacketDistributor.DIMENSION.with(() -> dimension), new MessageS2CSpawnParticle(name, posX, posY, posZ, motionX, motionY, motionZ));
+		BlueprintForge.CHANNEL.send(PacketDistributor.DIMENSION.with(() -> dimension), new MessageS2CSpawnParticle(name, posX, posY, posZ, motionX, motionY, motionZ));
 	}
 
 	/**
@@ -72,7 +72,7 @@ public final class NetworkUtil {
 	 */
 	public static void teleportEntity(Entity entity, double posX, double posY, double posZ) {
 		entity.moveTo(posX, posY, posZ, entity.getYRot(), entity.getXRot());
-		Blueprint.CHANNEL.send(PacketDistributor.ALL.with(() -> null), new MessageS2CTeleportEntity(entity.getId(), posX, posY, posZ));
+		BlueprintForge.CHANNEL.send(PacketDistributor.ALL.with(() -> null), new MessageS2CTeleportEntity(entity.getId(), posX, posY, posZ));
 	}
 
 	/**
@@ -83,7 +83,7 @@ public final class NetworkUtil {
 	 */
 	public static <E extends Entity & Endimatable> void setPlayingAnimation(E entity, PlayableEndimation endimationToPlay) {
 		if (!entity.level().isClientSide) {
-			Blueprint.CHANNEL.send(PacketDistributor.TRACKING_ENTITY_AND_SELF.with(() -> entity), new MessageS2CEndimation(entity.getId(), PlayableEndimationManager.INSTANCE.getID(endimationToPlay)));
+			BlueprintForge.CHANNEL.send(PacketDistributor.TRACKING_ENTITY_AND_SELF.with(() -> entity), new MessageS2CEndimation(entity.getId(), PlayableEndimationManager.INSTANCE.getID(endimationToPlay)));
 			entity.setPlayingEndimation(endimationToPlay);
 		}
 	}
@@ -96,7 +96,7 @@ public final class NetworkUtil {
 	 * @param entries  A set of new entries.
 	 */
 	public static void updateTrackedData(ServerPlayer player, int targetID, Set<IDataManager.DataEntry<?>> entries) {
-		Blueprint.CHANNEL.send(PacketDistributor.PLAYER.with(() -> player), new MessageS2CUpdateEntityData(targetID, entries));
+		BlueprintForge.CHANNEL.send(PacketDistributor.PLAYER.with(() -> player), new MessageS2CUpdateEntityData(targetID, entries));
 	}
 
 	/**
@@ -106,7 +106,7 @@ public final class NetworkUtil {
 	 * @param entries A set of new entries.
 	 */
 	public static void updateTrackedData(Entity entity, Set<IDataManager.DataEntry<?>> entries) {
-		Blueprint.CHANNEL.send(PacketDistributor.TRACKING_ENTITY.with(() -> entity), new MessageS2CUpdateEntityData(entity.getId(), entries));
+		BlueprintForge.CHANNEL.send(PacketDistributor.TRACKING_ENTITY.with(() -> entity), new MessageS2CUpdateEntityData(entity.getId(), entries));
 	}
 
 	/**
@@ -114,10 +114,10 @@ public final class NetworkUtil {
 	 *
 	 * @param setting The new slabfish hat setting(s).
 	 */
-	@OnlyIn(Dist.CLIENT)
+	@Environment(EnvType.CLIENT)
 	public static void updateSlabfish(byte setting) {
 		if (ClientInfo.getClientPlayer() != null) {
-			Blueprint.CHANNEL.sendToServer(new MessageC2SUpdateSlabfishHat(setting));
+			BlueprintForge.CHANNEL.sendToServer(new MessageC2SUpdateSlabfishHat(setting));
 		}
 	}
 }

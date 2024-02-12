@@ -1,6 +1,7 @@
 package com.teamabnormals.blueprint.core.util.registry;
 
 import com.google.common.collect.Sets;
+import io.github.fabricators_of_create.porting_lib.util.RegistryObject;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;

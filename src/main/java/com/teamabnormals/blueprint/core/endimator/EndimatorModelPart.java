@@ -3,9 +3,9 @@ package com.teamabnormals.blueprint.core.endimator;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.teamabnormals.blueprint.core.endimator.model.EndimatorPartPose;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.model.geom.ModelPart;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import org.joml.Quaternionf;
 
 import java.util.List;
@@ -16,7 +16,7 @@ import java.util.Map;
  *
  * @author SmellyModder (Luke Tonon)
  */
-@OnlyIn(Dist.CLIENT)
+@Environment(EnvType.CLIENT)
 public class EndimatorModelPart extends ModelPart implements EndimatablePart {
 	public float xOffset, yOffset, zOffset;
 	public boolean scaleChildren = true;

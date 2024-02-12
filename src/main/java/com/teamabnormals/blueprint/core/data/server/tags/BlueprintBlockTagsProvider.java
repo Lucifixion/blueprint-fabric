@@ -3,15 +3,14 @@ package com.teamabnormals.blueprint.core.data.server.tags;
 import com.teamabnormals.blueprint.core.other.tags.BlueprintBlockTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
-import net.minecraftforge.common.data.BlockTagsProvider;
-import net.minecraftforge.common.data.ExistingFileHelper;
+import net.minecraft.data.tags.VanillaBlockTagsProvider;
 
 import java.util.concurrent.CompletableFuture;
 
-public class BlueprintBlockTagsProvider extends BlockTagsProvider {
+public class BlueprintBlockTagsProvider extends VanillaBlockTagsProvider {
 
-	public BlueprintBlockTagsProvider(String modid, PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, ExistingFileHelper fileHelper) {
-		super(output, lookupProvider, modid, fileHelper);
+	public BlueprintBlockTagsProvider(String modid, PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider) {
+		super(output, lookupProvider);
 	}
 
 	@Override

@@ -4,7 +4,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
-import com.teamabnormals.blueprint.core.Blueprint;
+import com.teamabnormals.blueprint.core.BlueprintForge;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
 import net.minecraftforge.common.crafting.CraftingHelper;
@@ -43,7 +43,7 @@ public final class BlueprintAndCondition implements ICondition {
 		private final ResourceLocation location;
 
 		public Serializer() {
-			this.location = new ResourceLocation(Blueprint.MOD_ID, "and");
+			this.location = new ResourceLocation(BlueprintForge.MOD_ID, "and");
 		}
 
 		@Override
